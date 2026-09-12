@@ -44,3 +44,15 @@ def content_manager():
 @login_required
 def accounts_manager():
     return render_template("admin/accounts_manager.html", title="Admin Accounts Manager")
+
+
+@admin_bp.route("/pilates-roster")
+@login_required
+def pilates_roster_manager():
+    return render_template("admin/pilates_roster.html", title="Pilates Class Roster Manager")
+
+
+@admin_bp.route("/customers")
+@login_required
+def customers_manager():
+    return render_template("admin/customers_manager.html", title="Customer Loyalty & Password Manager")

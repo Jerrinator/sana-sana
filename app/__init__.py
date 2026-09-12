@@ -50,4 +50,12 @@ def create_app() -> Flask:
     app.register_blueprint(admin_bp)
     app.register_blueprint(api_bp)
 
+    @app.after_request
+    def add_header(response):
+        if "text/html" in response.content_type:
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response.headers["Pragma"] = "no-cache"
+            response.headers["Expires"] = "0"
+        return response
+
     return app

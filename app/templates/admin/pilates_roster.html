@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <div class="section-heading-row">
+    <h1>Reformer Pilates Class Roster</h1>
+    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-alt btn-small">&larr; Back to Dashboard</a>
+  </div>
+  <p class="lead">Ongoing class membership roster. Admins can view active participants, update status when members join or leave, or remove entries.</p>
+
+  <div class="card card-arched" style="padding: 1.5rem; margin-bottom: 2rem; border-radius: 20px !important;">
+    <div style="display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+      <div>
+        <h3>Roster Summary</h3>
+        <p class="muted" id="rosterSummaryText">Loading roster...</p>
+      </div>
+      <div>
+        <button id="filterActiveBtn" class="btn btn-small">Show Active Only</button>
+        <button id="filterAllBtn" class="btn btn-alt btn-small">Show All (Inc. Past Members)</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap card-arched" style="padding: 1rem; border-radius: 20px !important;">
+    <table>
+      <thead>
+        <tr>
+          <th>Participant Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Session Choice</th>
+          <th>Status</th>
+          <th>Joined Date</th>
+          <th>Notes</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="pilatesRosterTableBody">
+        <tr><td colspan="8" style="text-align: center; padding: 1.5rem;">Loading class participants...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const tbody = document.getElementById("pilatesRosterTableBody");
+  const summary = document.getElementById("rosterSummaryText");
+  const filterActiveBtn = document.getElementById("filterActiveBtn");
+  const filterAllBtn = document.getElementById("filterAllBtn");
+  let activeOnly = false;
+
+  async function loadRoster() {
+    try {
+      const res = await fetch(`/api/pilates/roster?active_only=${activeOnly}`);
+      const data = await res.json();
+      const roster = data.roster || [];
+
+      const activeCount = roster.filter(r => r.status === "Active").length;
+      summary.textContent = `Total Participants Listed: ${roster.length} | Active ongoing members: ${activeCount}`;
+
+      if (roster.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 1.5rem;">No participants found in the roster.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = roster.map(r => `
+        <tr style="background: ${r.status === 'Active' ? 'rgba(34, 60, 40, 0.04)' : 'transparent'};">
+          <td><strong>${r.name || 'N/A'}</strong></td>
+          <td><a href="tel:${r.phone}">${r.phone || 'N/A'}</a></td>
+          <td><a href="mailto:${r.email}">${r.email || 'N/A'}</a></td>
+          <td><span class="mini-pill" style="font-size: 0.7rem;">${r.session_type || 'Reformer'}</span></td>
+          <td>
+            <span class="pill" style="background: ${r.status === 'Active' ? 'rgba(34, 60, 40, 0.15)' : 'rgba(166, 88, 56, 0.15)'}; color: ${r.status === 'Active' ? 'var(--sana-forest)' : 'var(--sana-clay)'};">
+              ${r.status || 'Active'}
+            </span>
+          </td>
+          <td>${r.joined_date || 'N/A'}</td>
+          <td style="max-width: 200px; font-size: 0.85rem;">${r.notes || '-'}</td>
+          <td>
+            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+              ${r.status === 'Active' 
+                ? `<button onclick="toggleStatus('${r.id}', 'Inactive')" class="btn btn-small btn-alt" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;">Mark Inactive / Left</button>`
+                : `<button onclick="toggleStatus('${r.id}', 'Active')" class="btn btn-small" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;">Re-Activate</button>`
+              }
+              <button onclick="deleteEntry('${r.id}')" class="btn btn-small btn-alt" style="padding: 0.3rem 0.6rem; font-size: 0.75rem; background: var(--sana-terracotta);">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+    } catch (e) {
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--sana-clay);">Error loading roster.</td></tr>`;
+    }
+  }
+
+  window.toggleStatus = async (id, newStatus) => {
+    if (!confirm(`Change participant status to ${newStatus}?`)) return;
+    await fetch(`/api/pilates/roster/${id}/status`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus })
+    });
+    loadRoster();
+  };
+
+  window.deleteEntry = async (id) => {
+    if (!confirm("Are you sure you want to remove this participant from the roster?")) return;
+    await fetch(`/api/pilates/roster/${id}`, { method: "DELETE" });
+    loadRoster();
+  };
+
+  filterActiveBtn.addEventListener("click", () => { activeOnly = true; loadRoster(); });
+  filterAllBtn.addEventListener("click", () => { activeOnly = false; loadRoster(); });
+
+  loadRoster();
+});
+</script>
+{% endblock %}

@@ -6,10 +6,6 @@
       <p class="eyebrow">Home</p>
       <h1>{{ site_content.hero_text }}</h1>
       <p class="lead">Sana Sana brings together a calm wellness studio and a vibrant cafe, creating a place where movement, nourishment, and community flow together naturally.</p>
-      <div class="cta-row">
-        <a class="btn" href="#menu">Explore the Cafe &amp; Menu</a>
-        <a class="btn btn-alt" href="{{ url_for('public.contact_and_location') }}">Visit the Studio</a>
-      </div>
     </div>
     <div class="hero-card hero-visual-card">
       <img src="{{ url_for('static', filename='images/download (1).jpeg') }}" alt="Sana Sana mascot" class="mascot-image" />
@@ -26,39 +22,13 @@
   </div>
 </section>
 
-<section class="container section" id="menu">
-  <div class="section-heading-row">
-    <h2>Cafe &amp; Menu</h2>
-    <span class="mini-pill">Fresh picks</span>
-  </div>
-  <div class="card-grid adopt-grid">
-    <article class="card product-card">
-      <img src="{{ url_for('static', filename='images/menu.jpeg') }}" alt="Sana Sana cafe menu" class="card-image menu-image" loading="lazy" />
-      <h3>Garden Glow</h3>
-      <p>Cucumber, mint, lime, and vibrant greens for a clean reset.</p>
-      <span class="pill">Best seller</span>
-    </article>
-    <article class="card product-card">
-      <img src="{{ url_for('static', filename='images/download (4).jpeg') }}" alt="Sana Sana inspiration board" class="card-image" loading="lazy" />
-      <h3>Daily Balance</h3>
-      <p>Bright ingredients and wellness blends to support everyday energy.</p>
-      <span class="pill">Wellness ritual</span>
-    </article>
-    <article class="card product-card">
-      <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Sana Sana logo" class="card-image logo-image" loading="lazy" />
-      <h3>Studio Fuel</h3>
-      <p>Simple, nourishing favorites made for movement and recovery.</p>
-      <span class="pill">New</span>
-    </article>
-  </div>
-</section>
-
 <section class="container section split-help">
-  <h2>Pilates Studio</h2>
+  <h2>Reformer Pilates Studio</h2>
+  <h2>Reformer Pilates Studio</h2>
   <div class="triple">
-    <article class="info-block"><h3>Small group energy</h3><p>Supportive classes designed to build strength, mobility, and confidence.</p></article>
-    <article class="info-block"><h3>Mind + body</h3><p>Movement, breath, and recovery in a space created for everyday wellness.</p></article>
-    <article class="info-block"><h3>Community feel</h3><p>A welcoming studio culture rooted in consistency, connection, and care.</p></article>
+    <article class="info-block card-arched"><h3>Small group energy</h3><p>Supportive reformer classes designed to build strength, mobility, and confidence.</p></article>
+    <article class="info-block card-arched"><h3>Mind + body</h3><p>Movement, breath, and recovery on the reformer machine for everyday wellness.</p></article>
+    <article class="info-block card-arched"><h3>Community feel</h3><p>A welcoming studio culture rooted in consistency, connection, and care.</p></article>
   </div>
 </section>
 

@@ -420,7 +420,7 @@ def submit_contact_message():
     if not recipients:
         return jsonify({"error": "No admin recipient email is configured yet."}), 503
 
-    subject = f"BHLR Contact Form: {data.get('name', '').strip()}"
+    subject = f"Contact Form: {data.get('name', '').strip()}"
     text_body = (
         "A new contact form message was submitted.\n\n"
         f"Name: {data.get('name', '').strip()}\n"
@@ -439,7 +439,163 @@ def submit_contact_message():
     if not ok:
         return jsonify({"error": error or "Unable to send message email right now."}), 503
 
-    return jsonify({"success": True, "message": "Message sent to BHLR admins."})
+    return jsonify({"success": True, "message": "Message sent successfully."})
+
+
+# Pilates Roster Endpoints
+@api_bp.route("/pilates/signup", methods=["POST"])
+def pilates_signup():
+    data = request.get_json(silent=True) or {}
+    name = data.get("name", "").strip()
+    phone = data.get("phone", "").strip()
+    email = data.get("email", "").strip()
+
+    if not name or not phone or not email:
+        return jsonify({"error": "Please provide your name, phone number, and email."}), 400
+
+    entry = db.create_pilates_signup(data)
+    if not entry:
+        return jsonify({"error": "Unable to add to roster right now. Please try again."}), 500
+
+    # Notify admins by email
+    recipients = _collect_admin_emails()
+    if recipients:
+        subject = f"Reformer Pilates Sign-Up: {name}"
+        text_body = (
+            "A new participant has joined the Reformer Pilates Roster!\n\n"
+            f"Name: {name}\n"
+            f"Phone: {phone}\n"
+            f"Email: {email}\n"
+            f"Session Interest: {data.get('interest') or 'Reformer Flow'}\n"
+            f"Notes: {data.get('notes', '')}\n"
+        )
+        send_email(
+            subject=subject,
+            recipients=recipients,
+            text_body=text_body,
+            reply_to=email or None,
+        )
+
+    return jsonify({"success": True, "entry": entry})
+
+
+@api_bp.route("/pilates/roster", methods=["GET"])
+@login_required
+def get_pilates_roster():
+    active_only = request.args.get("active_only", "false").lower() == "true"
+    roster = db.list_pilates_roster(active_only=active_only)
+    return jsonify({"roster": roster})
+
+
+@api_bp.route("/pilates/roster/<entry_id>/status", methods=["PUT"])
+@login_required
+def update_pilates_roster_status(entry_id):
+    data = request.get_json(silent=True) or {}
+    status = data.get("status", "Active").strip()
+    if status not in ["Active", "Inactive"]:
+        return jsonify({"error": "Status must be 'Active' or 'Inactive'."}), 400
+
+    updated = db.update_pilates_roster_status(entry_id, status)
+    if not updated:
+        return jsonify({"error": "Entry not found or unable to update."}), 444
+    return jsonify({"success": True, "entry": updated})
+
+
+@api_bp.route("/pilates/roster/<entry_id>", methods=["DELETE"])
+@login_required
+def delete_pilates_roster_entry(entry_id):
+    deleted = db.delete_pilates_roster_entry(entry_id)
+    if not deleted:
+        return jsonify({"error": "Entry not found."}), 404
+    return jsonify({"success": True})
+
+
+# Customer Loyalty & Password Management Endpoints
+@api_bp.route("/admin/customers", methods=["GET"])
+@login_required
+def get_admin_customers():
+    customers = db.list_customers()
+    for c in customers:
+        if "password_hash" in c:
+            c.pop("password_hash", None)
+    return jsonify({"customers": customers})
+
+
+@api_bp.route("/admin/customers/<customer_id>/reset-password", methods=["POST"])
+@login_required
+def admin_reset_customer_password(customer_id):
+    data = request.get_json(silent=True) or {}
+    new_password = data.get("password", "").strip()
+    if not new_password:
+        return jsonify({"error": "New password is required."}), 400
+
+    customer = db.get_customer_by_id(customer_id)
+    if not customer:
+        return jsonify({"error": "Customer not found."}), 404
+
+    updated = db.reset_customer_password(customer_id, new_password)
+    email_sent = False
+
+    # Dispatch email if requested and customer has email
+    if data.get("send_email", True) and customer.get("email"):
+        subject = "Your Sana Sana Loyalty Rewards Password Has Been Updated"
+        text_body = (
+            f"Hello {customer.get('name', 'Member')},\n\n"
+            f"Your password for your Sana Sana Rewards account ({customer.get('phone')}) has been updated by shop management.\n\n"
+            f"Your New Password: {new_password}\n\n"
+            "You can now sign in on our website at https://sana-sana-cafe-c6067fd2c0e7.herokuapp.com using your phone number or email.\n\n"
+            "Warmly,\n"
+            "Sana Sana Team"
+        )
+        ok, _ = send_email(
+            subject=subject,
+            recipients=[customer["email"]],
+            text_body=text_body
+        )
+        email_sent = ok
+
+    return jsonify({"success": True, "customer": updated, "email_sent": email_sent})
+
+
+@api_bp.route("/admin/customers/<customer_id>/send-reset-email", methods=["POST"])
+@login_required
+def admin_send_reset_email(customer_id):
+    customer = db.get_customer_by_id(customer_id)
+    if not customer or not customer.get("email"):
+        return jsonify({"error": "Customer email not available."}), 400
+
+    # Generate temporary password reset code
+    temp_pass = f"Sana{str(uuid4())[:6]}"
+    db.reset_customer_password(customer_id, temp_pass)
+
+    subject = "Sana Sana Rewards Password Reset Request"
+    text_body = (
+        f"Hello {customer.get('name', 'Member')},\n\n"
+        f"We received a request to reset your Sana Sana Loyalty Rewards account password.\n\n"
+        f"Temporary Password: {temp_pass}\n\n"
+        "Please use this password to sign in at https://sana-sana-cafe-c6067fd2c0e7.herokuapp.com\n\n"
+        "Warmly,\n"
+        "Sana Sana Team"
+    )
+
+    ok, error = send_email(
+        subject=subject,
+        recipients=[customer["email"]],
+        text_body=text_body
+    )
+    if not ok:
+        return jsonify({"error": error or "Unable to send reset email."}), 503
+
+    return jsonify({"success": True, "message": f"Password reset email sent to {customer['email']}"})
+
+
+@api_bp.route("/admin/customers/<customer_id>", methods=["DELETE"])
+@login_required
+def delete_customer_account(customer_id):
+    deleted = db.delete_customer(customer_id)
+    if not deleted:
+        return jsonify({"error": "Customer not found."}), 404
+    return jsonify({"success": True})
 
 
 @api_bp.route("/content", methods=["PUT"])

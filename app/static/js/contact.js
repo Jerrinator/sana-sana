@@ -19,7 +19,7 @@ if (contactForm) {
     });
 
     if (response.ok) {
-      message.textContent = "Message sent. BHLR admins have been notified by email.";
+      message.textContent = "Message sent successfully.";
       contactForm.reset();
       return;
     }

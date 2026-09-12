@@ -6,8 +6,26 @@
     <h1>Good things, made simply.</h1>
     <p class="lead">Fresh food, bright drinks, and nourishing favorites to enjoy before class, after movement, or whenever you need a beautiful pause.</p>
   </div>
+
+  <div class="triple" style="margin-bottom: 2.5rem;">
+    <article class="info-block card-arched">
+      <h3>Garden Glow</h3>
+      <p>Cucumber, mint, lime, and vibrant greens for a clean reset.</p>
+      <p class="muted" style="margin-top: 0.5rem; font-size: 0.88rem;">✨ <strong>Benefits:</strong> Deep hydration, digestive balance, and instant skin radiance.</p>
+    </article>
+    <article class="info-block card-arched">
+      <h3>Golden Ritual Tonic</h3>
+      <p>Organic turmeric, ginger, citrus, and raw local honey.</p>
+      <p class="muted" style="margin-top: 0.5rem; font-size: 0.88rem;">✨ <strong>Benefits:</strong> Anti-inflammatory support, immune boost, and joint recovery.</p>
+    </article>
+    <article class="info-block card-arched">
+      <h3>Studio Recovery Smoothie</h3>
+      <p>Plant protein, banana, almond butter, dates, and cacao.</p>
+      <p class="muted" style="margin-top: 0.5rem; font-size: 0.88rem;">✨ <strong>Benefits:</strong> Muscle repair, sustained energy, and healthy core recovery.</p>
+    </article>
+  </div>
   <figure class="menu-feature">
-    <img src="{{ url_for('static', filename='images/menu.jpeg') }}" alt="Sana Sana cafe menu" class="menu-feature-image" />
+    <img src="{{ url_for('static', filename='images/menu2.png') }}" alt="Sana Sana cafe menu" class="menu-feature-image" />
     <figcaption>Explore the Sana Sana menu</figcaption>
   </figure>
   {% if session.get('admin_user') %}

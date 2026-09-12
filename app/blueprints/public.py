@@ -46,7 +46,7 @@ def cafe_and_menu():
     if urgent == "true":
         pets = [pet for pet in pets if pet.get("urgent")]
 
-    return render_template("public/adopt.html", title="Cafe & Menu", pets=pets)
+    return render_template("public/menu.html", title="Cafe & Menu", pets=pets)
 
 
 @public_bp.route("/adopt")
@@ -121,3 +121,9 @@ def contact_and_location():
 @public_bp.route("/contact")
 def contact():
     return redirect(url_for("public.contact_and_location"))
+
+
+@public_bp.route("/rewards")
+@public_bp.route("/customer-account")
+def rewards():
+    return render_template("public/customer_auth.html", title="Rewards & Loyalty")

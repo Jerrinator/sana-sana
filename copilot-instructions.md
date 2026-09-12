@@ -1,153 +1,56 @@
-# Boot Hill Integrated Deployment Instructions
+# Sana Sana Cafe (DrinkShop) Deployment Instructions
 
-These instructions apply when deploying the updated integrated Boot Hill Lifeline Rescue app to Heroku.
+These instructions apply when deploying the Sana Sana Cafe Flask web application to Heroku.
 
-## Required Deployment Target
+## Deployment Overview & Rules
 
-- Heroku app: `bhlr`
-- Heroku container image: `registry.heroku.com/bhlr/web`
-- Production domain: `https://www.boothilllifelinerescue.org`
-- Integrated Dockerfile: `boot_hill_lifeline_rescue/Dockerfile.integrated`
-- Required build context: the repository root containing both directories:
-  - `boot_hill_lifeline_rescue/`
-  - `GAssistant/`
-
-## Non-Negotiable Rules
-
-1. Do not deploy the old standalone rescue app.
-2. Do not use the inner `boot_hill_lifeline_rescue` directory as Docker build context.
-3. Do not modify `GAssistant/` during deployment.
-4. Do not modify `.env` or print secrets.
-5. Do not run `git push heroku`; this app is deployed through the Heroku container registry.
-6. Do not create a new Heroku app.
-7. Do not change or remove existing Heroku config vars.
-8. Do not run `heroku config:unset`.
-9. Do not commit changes or create branches.
-10. Never run `cd`, `pushd`, `popd`, or any command that changes the working directory.
-11. Assume Copilot is already running from the correct repository root. Execute every command from that starting directory.
-12. If a required command fails, stop and report the command and concise error. Do not improvise a different deployment method.
-
-## Expected Repository Layout
-
-The working directory for deployment must contain:
-
-```text
-GAssistant/
-boot_hill_lifeline_rescue/
-```
-
-The integrated Dockerfile must contain the equivalent of:
-
-```dockerfile
-COPY boot_hill_lifeline_rescue/requirements.txt /tmp/host-requirements.txt
-COPY GAssistant/requirements.txt /tmp/assistant-requirements.txt
-COPY boot_hill_lifeline_rescue/ /app/
-COPY GAssistant/ /opt/gassistant/
-```
-
-If either source directory or the integrated Dockerfile is missing, stop and report the missing path.
+- **Heroku App Name:** `sana-sana-cafe`
+- **Container Registry Target:** `registry.heroku.com/sana-sana-cafe/web`
+- **Dockerfile Path:** `./Dockerfile`
+- **Build Context:** Workspace root (`.`)
+- **App Web URL:** `https://sana-sana-cafe-c6067fd2c0e7.herokuapp.com/`
 
 ## Deployment Procedure
 
-Execute these commands in this exact order from the current working directory. Do not change directories.
+Execute these exact steps in order from the repository root:
 
-## Exact Copy-Paste Commands
+### 1. Authenticate with Heroku Container Registry
 
-Run the following commands exactly as written. The terminal must already be at the repository root containing `GAssistant/` and `boot_hill_lifeline_rescue/`.
-
-```bash
-test -d GAssistant && test -d boot_hill_lifeline_rescue && test -f boot_hill_lifeline_rescue/Dockerfile.integrated && test -f boot_hill_lifeline_rescue/Procfile && test -f boot_hill_lifeline_rescue/run.py
-```
+Ensure environment variables from `.env` (including `HEROKU_API_KEY`) are exported if necessary, then log in:
 
 ```bash
-heroku container:login
+export $(grep -v '^#' .env | xargs) && heroku container:login
 ```
 
-```bash
-docker buildx build --platform linux/amd64 --provenance=false --sbom=false --file boot_hill_lifeline_rescue/Dockerfile.integrated --output=type=image,name=registry.heroku.com/bhlr/web,push=true,oci-mediatypes=false .
-```
+### 2. Build and Push Image with Docker Buildx
 
-```bash
-heroku container:release web -a bhlr
-```
-
-```bash
-curl -I --max-time 30 https://www.boothilllifelinerescue.org
-```
-
-```bash
-curl --max-time 30 https://www.boothilllifelinerescue.org/assistant/health
-```
-
-```bash
-curl --max-time 30 https://www.boothilllifelinerescue.org/api/pets
-```
-
-If any command fails, stop immediately and report the failed command and its error. Do not continue to the next command.
-
-### 1. Confirm Location
-
-```bash
-pwd
-```
-
-The output must be the repository root containing both `GAssistant` and `boot_hill_lifeline_rescue`.
-
-### 2. Confirm Required Files
-
-```bash
-test -d GAssistant && \
-test -d boot_hill_lifeline_rescue && \
-test -f boot_hill_lifeline_rescue/Dockerfile.integrated && \
-test -f boot_hill_lifeline_rescue/Procfile && \
-test -f boot_hill_lifeline_rescue/run.py
-```
-
-If any command returns a nonzero exit code, stop.
-
-### 3. Log In To Heroku Container Registry
-
-```bash
-heroku container:login
-```
-
-If this fails, stop.
-
-### 4. Build And Push Integrated Image
+Build for `linux/amd64` using `buildx` with explicit flags to avoid OCI manifest / attestation issues on Heroku:
 
 ```bash
 docker buildx build \
   --platform linux/amd64 \
   --provenance=false \
   --sbom=false \
-  --file boot_hill_lifeline_rescue/Dockerfile.integrated \
-  --output=type=image,name=registry.heroku.com/bhlr/web,push=true,oci-mediatypes=false \
+  -t registry.heroku.com/sana-sana-cafe/web:latest \
+  --output=type=image,name=registry.heroku.com/sana-sana-cafe/web,push=true,oci-mediatypes=false \
   .
 ```
 
-Do not remove `--platform linux/amd64`, `--provenance=false`, `--sbom=false`, or `oci-mediatypes=false`.
+### 3. Release Web Container
 
-### 5. Release The Image
-
-```bash
-heroku container:release web -a bhlr
-```
-
-Wait for the command to finish. If it fails, stop.
-
-### 6. Verify Production
+Release the pushed web image to the `sana-sana-cafe` Heroku app:
 
 ```bash
-curl -I --max-time 30 https://www.boothilllifelinerescue.org
-curl --max-time 30 https://www.boothilllifelinerescue.org/assistant/health
-curl --max-time 30 https://www.boothilllifelinerescue.org/api/pets
+heroku container:release web -a sana-sana-cafe
 ```
 
-Expected results:
+### 4. Verify Health
 
-- Website request returns HTTP `200`.
-- Assistant health returns JSON with `"status":"ok"` when `OPENAI_API_KEY` and assistant configuration are valid.
-- Pet API returns JSON.
+Verify that the site is active and returning HTTP `200`:
+
+```bash
+curl -I --max-time 30 https://sana-sana-cafe-c6067fd2c0e7.herokuapp.com/
+```
 
 ## Required Integrated Runtime Configuration
 

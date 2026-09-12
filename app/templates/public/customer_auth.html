@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <div class="rewards-banner card-arched" style="padding: clamp(1.5rem, 3vw, 2.5rem); border-radius: 36px !important;">
+    <div class="rewards-intro" style="text-align: center; margin-bottom: 2rem;">
+      <span class="mini-pill">Loyalty Rewards</span>
+      <h1 style="margin-top: 0.5rem; margin-bottom: 0.6rem; color: var(--sana-forest);">Sana Sana Loyalty &amp; Rewards</h1>
+      <p class="lead" style="max-width: 44rem; margin: 0 auto;">Register your phone number &amp; email to earn points on every drink, snack, and reformer pilates class. Get <strong>10 bonus points</strong> instantly when you join!</p>
+    </div>
+
+    {% if session.get('customer') %}
+      <div class="rewards-card member-card card-arched" style="max-width: 32rem; margin: 0 auto; padding: 2rem; border-radius: 28px !important;">
+        <div class="member-header">
+          <span class="member-badge">✨ {{ session['customer'].get('tier', 'Sana Member') }}</span>
+          <h2 style="margin-top: 0.5rem;">Welcome back, {{ session['customer']['name'] }}!</h2>
+          <p class="muted">Registered Phone: {{ session['customer']['phone'] }}</p>
+          {% if session['customer'].get('email') %}
+            <p class="muted" style="font-size: 0.88rem;">Email: {{ session['customer']['email'] }}</p>
+          {% endif %}
+        </div>
+        <div class="points-display" style="margin: 1.5rem 0;">
+          <span class="points-num" style="font-size: 4rem;">{{ session['customer'].get('points', 10) }}</span>
+          <span class="points-label">Reward Points Balance</span>
+        </div>
+        <div class="perks-list" style="background: rgba(248, 244, 236, 0.8); border-radius: 16px; padding: 1rem 1.2rem; text-align: left; margin: 1.2rem 0;">
+          <p style="margin: 0.4rem 0;">🎁 <strong>15 points</strong> = Free Wellness Shot</p>
+          <p style="margin: 0.4rem 0;">🥤 <strong>30 points</strong> = Free Signature Drink</p>
+          <p style="margin: 0.4rem 0;">🧘 <strong>50 points</strong> = 50% Off Pilates Class</p>
+        </div>
+        <div class="cta-row" style="justify-content: center; margin-top: 1.2rem;">
+          <a href="{{ url_for('auth.customer_logout') }}" class="btn btn-alt">Sign Out of Rewards</a>
+        </div>
+      </div>
+    {% else %}
+      <div class="rewards-auth-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        <!-- Sign Up Form (Join Rewards) -->
+        <div class="rewards-box card-arched" style="padding: 2rem; border-radius: 28px !important; background: rgba(255,255,255,0.9);">
+          <h2 style="color: var(--sana-forest); margin-bottom: 0.3rem;">Join Loyalty Rewards</h2>
+          <p class="muted" style="margin-bottom: 1.2rem; font-size: 0.92rem;">New member? Create an account with your phone &amp; email for <strong>10 instant bonus points</strong>.</p>
+          <form action="{{ url_for('auth.customer_register') }}" method="post" class="stacked-form" style="padding: 0;">
+            <label style="font-weight: 600; font-size: 0.88rem;">Full Name</label>
+            <input type="text" name="name" placeholder="First and last name" required />
+            
+            <label style="font-weight: 600; font-size: 0.88rem; margin-top: 0.4rem;">Phone Number</label>
+            <input type="tel" name="phone" placeholder="e.g. 620-255-8142" required />
+            
+            <label style="font-weight: 600; font-size: 0.88rem; margin-top: 0.4rem;">Email Address</label>
+            <input type="email" name="email" placeholder="For rewards &amp; promo offers" required />
+            
+            <label style="font-weight: 600; font-size: 0.88rem; margin-top: 0.4rem;">Create Password</label>
+            <input type="password" name="password" placeholder="Choose a password" required />
+            
+            <button type="submit" class="btn" style="width: 100%; margin-top: 1rem; font-size: 1rem;">Create Account &amp; Claim 10 Pts</button>
+          </form>
+        </div>
+
+        <!-- Sign In Form (Member Sign In) -->
+        <div class="rewards-box card-arched" style="padding: 2rem; border-radius: 28px !important; background: rgba(255,255,255,0.9);">
+          <h2 style="color: var(--sana-forest); margin-bottom: 0.3rem;">Member Sign In</h2>
+          <p class="muted" style="margin-bottom: 1.2rem; font-size: 0.92rem;">Already a member? Sign in with your registered phone number or email address.</p>
+          <form action="{{ url_for('auth.customer_login') }}" method="post" class="stacked-form" style="padding: 0;">
+            <label style="font-weight: 600; font-size: 0.88rem;">Phone Number or Email</label>
+            <input type="text" name="phone" placeholder="Phone or email address" required />
+            
+            <label style="font-weight: 600; font-size: 0.88rem; margin-top: 0.4rem;">Password</label>
+            <input type="password" name="password" placeholder="Your password" required />
+            
+            <button type="submit" class="btn btn-alt" style="width: 100%; margin-top: 1rem; font-size: 1rem;">Sign In to View Points</button>
+          </form>
+          <div style="text-align: center; margin-top: 1.2rem;">
+            <a href="{{ url_for('auth.customer_forgot_password') }}" class="text-link" style="font-size: 0.9rem;">Forgot Password?</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

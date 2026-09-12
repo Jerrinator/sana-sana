@@ -1,63 +1,85 @@
 {% extends 'base.html' %}
 {% block content %}
 <section class="container section">
-  <h1>Pilates Studio</h1>
-  <h2>The hub for our fitness community</h2>
+  <h1>Reformer Pilates Studio</h1>
+  <p class="lead" style="text-align: center; margin: 0 auto 2rem;">Small-group reformer pilates designed to build core strength, mobility, and confidence for every body.</p>
+  
   <div class="triple">
-    <article class="info-block"><h3>Mat classes</h3><p>Low-impact movement for strength, posture, and balance.</p></article>
-    <article class="info-block"><h3>Mindful flow</h3><p>Breath-led sessions that build control and calm.</p></article>
-    <article class="info-block"><h3>Community</h3><p>A welcoming environment where consistency feels encouraging.</p></article>
+    <article class="info-block card-arched">
+      <h3>Reformer Flow</h3>
+      <p>Low-impact, high-resistance movement on the reformer machine for full-body tone and length.</p>
+    </article>
+    <article class="info-block card-arched">
+      <h3>Reformer Core &amp; Restore</h3>
+      <p>Precision alignment, deep core activation, and athletic stretching for post-workout recovery.</p>
+    </article>
+    <article class="info-block card-arched">
+      <h3>Reformer Strength</h3>
+      <p>Dynamic resistance training to elevate stamina, posture, and athletic control.</p>
+    </article>
   </div>
-  <h2>Our studio experience</h2>
-  <p>Sana Sana brings together movement, recovery, and a grounded sense of community. Our pilates classes are designed to help people feel strong, centered, and energized in a shared wellness space.</p>
-  <h2>What to expect</h2>
-  <ul>
-    <li>Small-group instruction and a supportive atmosphere</li>
-    <li>Classes focused on form, mobility, and core strength</li>
-    <li>An uplifting studio space that complements our cafe experience</li>
-  </ul>
-  <button class="btn btn-alt" type="button" id="fosterRulesBtn">View Studio Details</button>
 
-  <dialog id="fosterRulesModal" class="modal">
-    <div class="modal-content modal-panel">
-      <h2>Studio Details</h2>
-      <p>The Sana Sana studio is a place for movement, recovery, and connection.</p>
-
-      <h3>Class style</h3>
-      <ul>
-        <li>Focused on pilates fundamentals and mindful movement.</li>
-        <li>Designed for all experience levels with encouraging instruction.</li>
-        <li>Balanced to support strength, mobility, and everyday energy.</li>
-      </ul>
-
-      <h3>Community rhythm</h3>
-      <ul>
-        <li>Small, uplifting class energy.</li>
-        <li>Thoughtful recovery and wellness experiences.</li>
-        <li>A studio-cafe atmosphere that supports a whole-life routine.</li>
-      </ul>
-
-      <div class="cta-row">
-        <button class="btn" type="button" id="closeFosterRulesModal">Close</button>
-      </div>
+  <div class="section" id="instructor" style="margin-top: 2rem;">
+    <div class="section-heading-row" style="justify-content: center; text-align: center;">
+      <h2>Meet Your Instructor</h2>
     </div>
-  </dialog>
+    <div class="card card-arched" style="max-width: 42rem; margin: 0 auto; padding: 2rem; text-align: center;">
+      <div class="arched-frame" style="max-width: 220px; margin: 0 auto 1.2rem;">
+        <img src="{{ url_for('static', filename='images/download (1).jpeg') }}" alt="Sana Sana Pilates Instructor" class="arched-photo" />
+      </div>
+      <h3>Guided Movement with Care</h3>
+      <p>Our certified reformer instructors bring warm encouragement, expert form correction, and personalized guidance to every reformer class. Whether you are stepping on the reformer for the first time or deepening your practice, you're supported every step of the way.</p>
+    </div>
+  </div>
 
-  <form id="volunteerForm" class="stacked-form">
-    <h2>Join the community</h2>
-    <input name="name" placeholder="Full name" required />
-    <input name="email" type="email" placeholder="Email" required />
-    <input name="phone" placeholder="Phone" required />
-    <select name="interest" required>
-      <option value="">Choose interest</option>
-      <option value="class">Class inquiry</option>
-      <option value="membership">Membership</option>
-      <option value="community">Community</option>
-    </select>
-    <textarea name="notes" placeholder="Tell us what you're looking for"></textarea>
-    <button class="btn" type="submit">Send Inquiry</button>
-    <p class="muted" id="volunteerMsg"></p>
-  </form>
+  <div class="section" id="signup" style="margin-top: 2rem;">
+    <div class="card card-arched" style="max-width: 38rem; margin: 0 auto; padding: 2rem;">
+      <h2 style="text-align: center;">Reformer Class Sign-Up</h2>
+      <p class="muted" style="text-align: center; margin-bottom: 1.5rem;">Reserve your reformer spot or request class availability.</p>
+
+      {% if session.get('customer') %}
+        <div class="one-click-box" style="background: rgba(34, 60, 40, 0.08); border: 2px solid rgba(34, 60, 40, 0.22); border-radius: 20px; padding: 1.5rem; text-align: center; margin-bottom: 1.8rem;">
+          <span class="member-badge">✨ {{ session['customer'].get('tier', 'Sana Member') }}</span>
+          <h3 style="margin-top: 0.4rem; color: var(--sana-forest);">⚡ 1-Click Reformer Sign-Up</h3>
+          <p style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--sana-ink);">
+            Signed in as <strong>{{ session['customer']['name'] }}</strong><br />
+            <span class="muted" style="font-size: 0.88rem;">Phone: {{ session['customer']['phone'] }}{% if session['customer'].get('email') %} | Email: {{ session['customer']['email'] }}{% endif %}</span>
+          </p>
+
+          <form id="oneClickForm" class="stacked-form" style="padding: 0; max-width: 26rem; margin: 0 auto;">
+            <input type="hidden" name="name" value="{{ session['customer']['name'] }}" />
+            <input type="hidden" name="phone" value="{{ session['customer']['phone'] }}" />
+            <input type="hidden" name="email" value="{{ session['customer'].get('email', '') }}" />
+            <select name="interest" required style="font-size: 0.95rem; font-weight: 600;">
+              <option value="Reformer Flow">Reformer Flow (All Levels)</option>
+              <option value="Reformer Core & Restore">Reformer Core &amp; Restore</option>
+              <option value="Reformer Intro">Reformer Intro &amp; Orientation</option>
+              <option value="Private Reformer Session">Private 1-on-1 Reformer Session</option>
+            </select>
+            <button class="btn" type="submit" style="width: 100%; font-size: 1.05rem; padding: 0.85rem;">One-Click Join Roster</button>
+            <p class="muted" id="oneClickMsg" style="text-align: center; margin-top: 0.5rem;"></p>
+          </form>
+        </div>
+      {% endif %}
+
+      <form id="volunteerForm" class="stacked-form">
+        <h3 style="text-align: center; font-size: 1.3rem;">{% if session.get('customer') %}Or Sign Up with Custom Details{% else %}Participant Sign-Up Form{% endif %}</h3>
+        <input name="name" placeholder="Full name" value="{{ session.get('customer', {}).get('name', '') }}" required />
+        <input name="email" type="email" placeholder="Email address" value="{{ session.get('customer', {}).get('email', '') }}" required />
+        <input name="phone" placeholder="Phone number" value="{{ session.get('customer', {}).get('phone', '') }}" required />
+        <select name="interest" required>
+          <option value="">Select Reformer Session</option>
+          <option value="Reformer Intro">Reformer Intro &amp; Orientation</option>
+          <option value="Reformer Flow">Reformer Flow (All Levels)</option>
+          <option value="Reformer Core & Restore">Reformer Core &amp; Restore</option>
+          <option value="Private Reformer Session">Private 1-on-1 Reformer Session</option>
+        </select>
+        <textarea name="notes" placeholder="Any fitness goals, physical considerations, or preferred class times?"></textarea>
+        <button class="btn btn-alt" type="submit">Complete Sign-Up Request</button>
+        <p class="muted" id="volunteerMsg" style="text-align: center;"></p>
+      </form>
+    </div>
+  </div>
 </section>
 {% endblock %}
 

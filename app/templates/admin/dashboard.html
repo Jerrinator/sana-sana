@@ -10,9 +10,13 @@
   </div>
 
   <div class="triple dashboard-grid">
-    <a class="panel-link" href="{{ url_for('admin.pet_registry') }}">
-      <h2>Pet Registry</h2>
-      <p>Track every pet intake record, assign unique pet IDs, and control who appears in adoption/public listings.</p>
+    <a class="panel-link" href="{{ url_for('admin.customers_manager') }}">
+      <h2>Customer Loyalty &amp; Passwords</h2>
+      <p>View registered rewards members, edit points/tier, reset passwords, or trigger password reset emails.</p>
+    </a>
+    <a class="panel-link" href="{{ url_for('admin.pilates_roster_manager') }}">
+      <h2>Pilates Class Roster</h2>
+      <p>Manage the ongoing Reformer Pilates class membership roster, track participant status (Active / Left), contact members, and update registrations.</p>
     </a>
     <a class="panel-link" href="{{ url_for('admin.accounts_manager') }}">
       <h2>Account Admin</h2>

@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <div class="section-heading-row">
+    <h1>Customer Loyalty &amp; Password Manager</h1>
+    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-alt btn-small">&larr; Back to Dashboard</a>
+  </div>
+  <p class="lead">View all registered rewards members, manage loyalty points, reset customer passwords, or dispatch password reset notification emails.</p>
+
+  <div class="table-wrap card-arched" style="padding: 1.2rem; border-radius: 20px !important;">
+    <table>
+      <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Points</th>
+          <th>Member Tier</th>
+          <th>Joined</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="customerTableBody">
+        <tr><td colspan="7" style="text-align: center; padding: 1.5rem;">Loading customer members...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Reset Password Modal -->
+<dialog id="resetModal" class="modal">
+  <div class="modal-content modal-panel card-arched" style="max-width: 28rem; padding: 2rem;">
+    <h3>Reset Customer Password</h3>
+    <p class="muted" id="resetModalSub">Updating password for member.</p>
+    <form id="resetForm" class="stacked-form" style="padding: 0; margin-top: 1rem;">
+      <input type="hidden" id="resetCustId" />
+      <input type="text" id="resetNewPass" placeholder="Enter New Password (e.g. SanaPass2026!)" required />
+      <div style="display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1rem;">
+        <button type="button" id="closeResetBtn" class="btn btn-alt btn-small">Cancel</button>
+        <button type="submit" class="btn btn-small">Save &amp; Email Customer</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const tbody = document.getElementById("customerTableBody");
+  const resetModal = document.getElementById("resetModal");
+  const resetForm = document.getElementById("resetForm");
+  const closeResetBtn = document.getElementById("closeResetBtn");
+  const resetCustId = document.getElementById("resetCustId");
+  const resetModalSub = document.getElementById("resetModalSub");
+  const resetNewPass = document.getElementById("resetNewPass");
+
+  async function loadCustomers() {
+    try {
+      const res = await fetch("/api/admin/customers");
+      const data = await res.json();
+      const customers = data.customers || [];
+
+      if (customers.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 1.5rem;">No registered customer loyalty members found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = customers.map(c => `
+        <tr>
+          <td><strong>${c.name || 'Member'}</strong></td>
+          <td><a href="tel:${c.phone}">${c.phone || 'N/A'}</a></td>
+          <td><a href="mailto:${c.email}">${c.email || 'N/A'}</a></td>
+          <td><span class="mini-pill">${c.points || 0} pts</span></td>
+          <td><span class="pill" style="background: rgba(166, 88, 56, 0.15); color: var(--sana-clay);">${c.reward_tier || 'Sana Member'}</span></td>
+          <td>${(c.created_at || '').substring(0, 10)}</td>
+          <td>
+            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+              <button onclick="openResetModal('${c.id}', '${c.name}', '${c.email}')" class="btn btn-small" style="font-size: 0.75rem; padding: 0.35rem 0.7rem;">Reset Password</button>
+              <button onclick="sendResetEmailOnly('${c.id}', '${c.email}')" class="btn btn-small btn-alt" style="font-size: 0.75rem; padding: 0.35rem 0.7rem;">Email Reset Link</button>
+              <button onclick="deleteCust('${c.id}')" class="btn btn-small btn-alt" style="font-size: 0.75rem; padding: 0.35rem 0.7rem; background: var(--sana-terracotta);">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+    } catch (e) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--sana-clay);">Error loading customers.</td></tr>`;
+    }
+  }
+
+  window.openResetModal = (id, name, email) => {
+    resetCustId.value = id;
+    resetModalSub.textContent = `Set a new password for ${name} (${email || 'No email'})`;
+    resetNewPass.value = "Sana" + Math.floor(1000 + Math.random() * 9000) + "!";
+    resetModal.showModal();
+  };
+
+  closeResetBtn.addEventListener("click", () => resetModal.close());
+
+  resetForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const custId = resetCustId.value;
+    const newPassword = resetNewPass.value;
+
+    try {
+      const res = await fetch(`/api/admin/customers/${custId}/reset-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: newPassword, send_email: true })
+      });
+      const result = await res.json();
+      if (res.ok && result.success) {
+        alert(`Password for ${result.customer.name} updated to '${newPassword}'!` + (result.email_sent ? " Notification email dispatched." : ""));
+        resetModal.close();
+        loadCustomers();
+      } else {
+        alert(result.error || "Unable to reset password.");
+      }
+    } catch (err) {
+      alert("Error processing password reset.");
+    }
+  });
+
+  window.sendResetEmailOnly = async (id, email) => {
+    if (!confirm(`Send password reset email to ${email || 'customer'}?`)) return;
+    try {
+      const res = await fetch(`/api/admin/customers/${id}/send-reset-email`, { method: "POST" });
+      const result = await res.json();
+      if (res.ok && result.success) {
+        alert("Password reset email sent successfully!");
+      } else {
+        alert(result.error || "Unable to send reset email.");
+      }
+    } catch (err) {
+      alert("Error sending reset email.");
+    }
+  };
+
+  window.deleteCust = async (id) => {
+    if (!confirm("Are you sure you want to delete this customer loyalty account?")) return;
+    await fetch(`/api/admin/customers/${id}`, { method: "DELETE" });
+    loadCustomers();
+  };
+
+  loadCustomers();
+});
+</script>
+{% endblock %}
