@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <h1>Hot Tips</h1>
+  <p>Seasonal safety and practical guidance for pet owners within Dodge City and surrounding areas.</p>
+  <div class="filter-row">
+    <label for="tipsCategory">Category</label>
+    <select id="tipsCategory">
+      <option value="all">All</option>
+      <option value="Summer">Summer</option>
+      <option value="Winter">Winter</option>
+      <option value="Travel">Travel</option>
+      <option value="Health">Health</option>
+      <option value="General">General</option>
+    </select>
+  </div>
+  <div class="card-grid" id="tipsList">
+    {% for tip in tips %}
+      <article class="card" data-category="{{ tip.category }}">
+        <h3>{{ tip.title }}</h3>
+        <p>{{ tip.description }}</p>
+        <span class="pill">{{ tip.category }}</span>
+      </article>
+    {% else %}
+      <p>No tips have been published yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/tips.js') }}" defer></script>
+{% endblock %}

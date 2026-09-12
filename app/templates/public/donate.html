@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <h1>Donate</h1>
+  <p>Donations keep transport, medical treatment, and foster supplies consistent for pets across our 75-100 mile service area.</p>
+  <div class="triple">
+    <article class="info-block"><h3>One-Time</h3><p>Handle immediate medical or intake needs.</p></article>
+    <article class="info-block"><h3>Recurring</h3><p>Maintain predictable monthly rescue capacity.</p></article>
+    <article class="info-block"><h3>In-Kind</h3><p>Food, crates, cleaning supplies, and medication support.</p></article>
+  </div>
+  <p><a class="btn" href="{{ payment_link }}" target="_blank" rel="noopener">Go to Secure Donation Link</a></p>
+  <h2>Typical Cost Breakdown</h2>
+  <ul>
+    <li>Vaccines and vet checks: $65-$180 per intake</li>
+    <li>Spay/neuter support: $90-$300</li>
+    <li>Fuel and transport: $25-$120 per run</li>
+    <li>Foster supplies: $40-$150 per month per pet</li>
+  </ul>
+</section>
+{% endblock %}

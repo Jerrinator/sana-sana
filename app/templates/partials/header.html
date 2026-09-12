@@ -1,0 +1,36 @@
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="{{ url_for('public.home') }}">
+      <span class="brand-badge">
+        <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Sana Sana logo" />
+      </span>
+      <span class="brand-text-wrap">
+        <span class="brand-text">Sana Sana</span>
+        <span class="brand-tag">Cafe + Studio</span>
+      </span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">Menu</button>
+    <nav id="siteNav" class="site-nav">
+      <a href="{{ url_for('public.home') }}">Home</a>
+      <div class="dropdown">
+        <button class="dropdown-toggle" type="button">Pilates Studio</button>
+        <div class="dropdown-menu">
+          <a href="{{ url_for('public.pilates_studio') }}">Our Classes</a>
+          <a href="{{ url_for('public.pilates_studio') }}">Membership</a>
+          <a href="{{ url_for('public.contact_and_location') }}">Schedule</a>
+        </div>
+      </div>
+      <a href="{{ url_for('public.cafe_and_menu') }}">Cafe &amp; Menu</a>
+      <a href="{{ url_for('public.about_us') }}">About Us</a>
+      <a href="{{ url_for('public.contact_and_location') }}">Contact &amp; Location</a>
+      {% if session.get('admin_user') %}
+        <a href="{{ url_for('admin.dashboard') }}">Admin</a>
+        <span class="auth-state logged-in">Logged in as {{ session.get('admin_profile', {}).get('first_name', session.get('admin_user')) }}</span>
+        <a href="{{ url_for('auth.logout') }}">Log Out</a>
+      {% else %}
+        <span class="auth-state logged-out">Signed out</span>
+        <a href="{{ url_for('auth.login') }}">Admin Login</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>

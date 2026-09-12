@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section narrow">
+  <h1>Admin Login</h1>
+  <form class="stacked-form" method="post">
+    <input type="email" name="email" placeholder="Email address" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button class="btn" type="submit">Sign In</button>
+  </form>
+  <p class="muted">Set ADMIN_EMAIL and ADMIN_PASSWORD in .env to seed your first account. Seeded admins start with the temporary password change-me-now and must change it after the first login.</p>
+</section>
+{% endblock %}

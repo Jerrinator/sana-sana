@@ -1,0 +1,22 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <section>
+      <h4>Sana Sana</h4>
+      <p>{{ site_content.footer_text }}</p>
+      <p>Fresh flavors, bright ingredients, and feel-good rituals.</p>
+    </section>
+    <section>
+      <h4>Visit</h4>
+      <p>Email: {{ site_content.contact_info.email }}</p>
+      <p>Phone: {{ site_content.contact_info.phone }}</p>
+      {% if site_content.contact_info.address %}
+        <p>Address: {{ site_content.contact_info.address }}</p>
+      {% endif %}
+    </section>
+    <section>
+      <h4>Follow</h4>
+      <p><a href="{{ site_content.contact_info.social.facebook }}" target="_blank" rel="noopener">Facebook</a></p>
+      <p><a href="{{ site_content.contact_info.social.instagram }}" target="_blank" rel="noopener">Instagram</a></p>
+    </section>
+  </div>
+</footer>

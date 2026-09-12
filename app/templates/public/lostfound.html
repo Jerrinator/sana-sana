@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <h1>Lost & Found Pets</h1>
+  <p class="muted">Submission support is focused on Dodge City and surrounding communities within a 75-100 mile radius.</p>
+  <form id="lostFoundForm" class="stacked-form" enctype="multipart/form-data">
+    <h2>Submit a Report</h2>
+    <input name="poster_name" placeholder="Your name" required />
+    <input name="contact" placeholder="Phone or email" required />
+    <input name="location" placeholder="Last seen location" required />
+    <input type="date" name="date" required />
+    <textarea name="description" placeholder="Description" required></textarea>
+    <input type="file" name="photos" id="lostFoundPhotos" accept="image/png,image/jpeg" multiple />
+    <div id="lostFoundPreview" class="preview-row"></div>
+    <button class="btn" type="submit">Submit for Review</button>
+    <p id="lostFoundMessage" class="muted"></p>
+  </form>
+</section>
+
+<section class="container section">
+  <h2>Public Feed</h2>
+  <div class="card-grid" id="lostFoundFeed">
+    {% for post in posts %}
+      <article class="card">
+        <h3>{{ post.location }}</h3>
+        <p>{{ post.description }}</p>
+        <p class="muted">Posted by {{ post.poster_name }} | {{ post.date }}</p>
+      </article>
+    {% else %}
+      <p>No approved posts yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/lostfound.js') }}" defer></script>
+{% endblock %}

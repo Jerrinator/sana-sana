@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  {% if pet %}
+    <h1>{{ pet.name }}</h1>
+    <p class="lead">{{ pet.breed }} | {{ pet.age }}</p>
+    <div class="gallery">
+      {% for photo in pet.photos %}
+        {% if photo.startswith('http://') or photo.startswith('https://') or photo.startswith('data:') %}
+          <img src="{{ photo }}" alt="{{ pet.name }} photo" loading="lazy" onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/pet-placeholder.svg') }}';" />
+        {% else %}
+          <img src="{{ url_for('static', filename='uploads/' ~ photo) }}" alt="{{ pet.name }} photo" loading="lazy" onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/pet-placeholder.svg') }}';" />
+        {% endif %}
+      {% endfor %}
+    </div>
+    <h2>Personality</h2><p>{{ pet.personality }}</p>
+    <h2>Medical</h2><p>{{ pet.medical }}</p>
+    <h2>Requirements</h2><p>{{ pet.requirements }}</p>
+    <a href="{{ url_for('public.contact_and_location') }}" class="btn">Apply to Adopt</a>
+  {% else %}
+    <h1>Pet not found</h1>
+    <p>Please return to the adoptable pets page.</p>
+  {% endif %}
+</section>
+{% endblock %}

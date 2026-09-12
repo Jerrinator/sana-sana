@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <h1>Admin Account Management</h1>
+  <p>Create, edit, and deactivate admin accounts. Permission levels are stored directly on each account.</p>
+
+  <form id="adminAccountForm" class="stacked-form">
+    <input type="hidden" name="id" />
+    <input name="first_name" placeholder="First name" required />
+    <input name="last_name" placeholder="Last name" required />
+    <input name="email" type="email" placeholder="Email address" required autocomplete="off" />
+    <input name="role" placeholder="Role" value="admin" required />
+    <select name="permission_level" required>
+      <option value="full">Full</option>
+      <option value="content">Content</option>
+      <option value="moderator">Moderator</option>
+      <option value="limited">Limited</option>
+    </select>
+    <label><input type="checkbox" name="is_active" checked /> Active</label>
+    <label><input type="checkbox" name="must_change_password" checked /> Force password change on first login</label>
+    <div class="cta-row">
+      <button class="btn" type="submit">Save Account</button>
+      <button class="btn btn-alt" type="button" id="adminAccountReset">Reset</button>
+    </div>
+  </form>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Email</th><th>Role</th><th>Permission</th><th>Active</th><th>Temp PW</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="adminAccountsTableBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<dialog id="adminAccountModal" class="modal">
+  <div class="modal-content">
+    <h2>Admin Account Saved</h2>
+    <p>The selected admin account has been updated.</p>
+    <button class="btn" id="closeAdminAccountModal">Close</button>
+  </div>
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin_accounts.js') }}" defer></script>
+{% endblock %}

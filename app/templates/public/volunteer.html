@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <h1>Pilates Studio</h1>
+  <h2>The hub for our fitness community</h2>
+  <div class="triple">
+    <article class="info-block"><h3>Mat classes</h3><p>Low-impact movement for strength, posture, and balance.</p></article>
+    <article class="info-block"><h3>Mindful flow</h3><p>Breath-led sessions that build control and calm.</p></article>
+    <article class="info-block"><h3>Community</h3><p>A welcoming environment where consistency feels encouraging.</p></article>
+  </div>
+  <h2>Our studio experience</h2>
+  <p>Sana Sana brings together movement, recovery, and a grounded sense of community. Our pilates classes are designed to help people feel strong, centered, and energized in a shared wellness space.</p>
+  <h2>What to expect</h2>
+  <ul>
+    <li>Small-group instruction and a supportive atmosphere</li>
+    <li>Classes focused on form, mobility, and core strength</li>
+    <li>An uplifting studio space that complements our cafe experience</li>
+  </ul>
+  <button class="btn btn-alt" type="button" id="fosterRulesBtn">View Studio Details</button>
+
+  <dialog id="fosterRulesModal" class="modal">
+    <div class="modal-content modal-panel">
+      <h2>Studio Details</h2>
+      <p>The Sana Sana studio is a place for movement, recovery, and connection.</p>
+
+      <h3>Class style</h3>
+      <ul>
+        <li>Focused on pilates fundamentals and mindful movement.</li>
+        <li>Designed for all experience levels with encouraging instruction.</li>
+        <li>Balanced to support strength, mobility, and everyday energy.</li>
+      </ul>
+
+      <h3>Community rhythm</h3>
+      <ul>
+        <li>Small, uplifting class energy.</li>
+        <li>Thoughtful recovery and wellness experiences.</li>
+        <li>A studio-cafe atmosphere that supports a whole-life routine.</li>
+      </ul>
+
+      <div class="cta-row">
+        <button class="btn" type="button" id="closeFosterRulesModal">Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <form id="volunteerForm" class="stacked-form">
+    <h2>Join the community</h2>
+    <input name="name" placeholder="Full name" required />
+    <input name="email" type="email" placeholder="Email" required />
+    <input name="phone" placeholder="Phone" required />
+    <select name="interest" required>
+      <option value="">Choose interest</option>
+      <option value="class">Class inquiry</option>
+      <option value="membership">Membership</option>
+      <option value="community">Community</option>
+    </select>
+    <textarea name="notes" placeholder="Tell us what you're looking for"></textarea>
+    <button class="btn" type="submit">Send Inquiry</button>
+    <p class="muted" id="volunteerMsg"></p>
+  </form>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/volunteer.js') }}" defer></script>
+{% endblock %}

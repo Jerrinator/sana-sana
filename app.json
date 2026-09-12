@@ -1,0 +1,43 @@
+{
+  "name": "boot-hill-lifeline-rescue",
+  "description": "Boot Hill Lifeline Rescue Flask app",
+  "repository": "https://github.com/<org-or-user>/boot_hill_lifeline_rescue",
+  "keywords": ["python", "flask", "astradb", "rescue"],
+  "env": {
+    "FLASK_SECRET_KEY": {
+      "description": "Flask secret key",
+      "generator": "secret"
+    },
+    "ASTRA_DB_API_ENDPOINT": {
+      "description": "Astra DB API endpoint"
+    },
+    "ASTRA_DB_APPLICATION_TOKEN": {
+      "description": "Astra DB application token"
+    },
+    "ASTRA_DB_KEYSPACE": {
+      "description": "Astra DB keyspace"
+    },
+    "PAYMENT_LINK": {
+      "description": "Public donation URL"
+    },
+    "ADMIN_USERNAME": {
+      "description": "Optional initial admin username",
+      "required": false
+    },
+    "ADMIN_PASSWORD": {
+      "description": "Optional initial admin password",
+      "required": false
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <h1>Pet Registry</h1>
+  <p>Track every pet that comes through BHLR. Mark <strong>Needs adoption</strong> to populate the public adopt gallery and home featured listings.</p>
+
+  <form id="petRegistryForm" class="stacked-form" enctype="multipart/form-data">
+    <input type="hidden" name="id" />
+    <label>Unique Pet ID <input name="gallery_id" placeholder="Assigned automatically" readonly /></label>
+    <input name="name" placeholder="Name" required />
+    <input name="age" placeholder="Age" required />
+    <label>
+      Breed
+      <input name="breed" id="petRegistryBreed" list="petBreedOptions" placeholder="Select or type breed" required />
+      <datalist id="petBreedOptions"></datalist>
+      <small class="muted">Start typing to search the breed list. If a breed is missing, type it manually and save.</small>
+    </label>
+    <textarea name="personality" placeholder="Personality" required></textarea>
+    <textarea name="medical" placeholder="Medical" required></textarea>
+    <textarea name="requirements" placeholder="Requirements" required></textarea>
+    <label>
+      Featured Order
+      <input name="featured_order" type="number" min="0" value="999" />
+      <small class="muted">Lower numbers appear first on public pages. Use 1 for highest priority; leave 999 for normal priority.</small>
+    </label>
+    <label><input type="checkbox" name="needs_adoption" value="true" checked /> Needs adoption (show in public gallery)</label>
+    <label><input type="checkbox" name="adopted" value="true" /> Mark as adopted</label>
+    <label><input type="checkbox" name="urgent" value="true" /> Mark as urgent</label>
+    <label><input type="checkbox" name="is_mixed_breed" value="true" /> Mixed breed (breed field is dominant breed)</label>
+    <label>
+      Pet Photos
+      <input type="file" name="photos" id="petRegistryPhotos" accept="image/png,image/jpeg" multiple />
+      <small class="muted">Upload image files from this device (JPG or PNG). These local files are uploaded and linked to the pet record.</small>
+    </label>
+    <div id="petRegistryPreview" class="preview-row"></div>
+    <p id="petRegistryStatus" class="inline-status" aria-live="polite"></p>
+    <div class="cta-row">
+      <button class="btn" type="submit">Save Registry Record</button>
+      <button class="btn btn-alt" type="button" id="petRegistryReset">Reset</button>
+    </div>
+  </form>
+
+  <div class="filter-row">
+    <input id="petRegistrySearch" type="text" placeholder="Search by pet ID, name, or breed" />
+    <label>
+      Visibility
+      <select id="petRegistryVisibilityFilter">
+        <option value="all">All records</option>
+        <option value="needs_adoption">Needs adoption</option>
+        <option value="not_needing_adoption">Not needing adoption</option>
+      </select>
+    </label>
+    <label>
+      Adoption Status
+      <select id="petRegistryAdoptionFilter">
+        <option value="all">All adoption statuses</option>
+        <option value="adopted">Adopted</option>
+        <option value="not_adopted">Not adopted</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Pet ID</th><th>Name</th><th>Breed</th><th>Mixed</th><th>Needs Adoption</th><th>Adopted</th><th>Featured</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="petRegistryTableBody"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pet_breeds.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/pet_registry.js') }}" defer></script>
+{% endblock %}

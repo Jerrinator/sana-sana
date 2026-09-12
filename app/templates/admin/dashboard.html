@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <h1>Admin Dashboard</h1>
+  <p class="lead">You are signed in as <strong>{{ admin_profile.get('first_name', admin_user) }} {{ admin_profile.get('last_name', '') }}</strong> ({{ admin_profile.get('email', admin_user) }}).</p>
+  <div class="info-block">
+    <p><strong>Status:</strong> Logged in</p>
+    <p><strong>Role:</strong> {{ admin_profile.get('role', 'admin') }}</p>
+    <p><strong>Permission Level:</strong> {{ admin_profile.get('permission_level', 'full') }}</p>
+  </div>
+
+  <div class="triple dashboard-grid">
+    <a class="panel-link" href="{{ url_for('admin.pet_registry') }}">
+      <h2>Pet Registry</h2>
+      <p>Track every pet intake record, assign unique pet IDs, and control who appears in adoption/public listings.</p>
+    </a>
+    <a class="panel-link" href="{{ url_for('admin.accounts_manager') }}">
+      <h2>Account Admin</h2>
+      <p>Create and update admin accounts, first/last name, email, roles, permissions, and active status.</p>
+    </a>
+    <a class="panel-link" href="{{ url_for('admin.pets_manager') }}">
+      <h2>Adoption Gallery</h2>
+      <p>Edit the public adoptable pets gallery and keep featured listings current.</p>
+    </a>
+    <a class="panel-link" href="{{ url_for('admin.lostfound_manager') }}">
+      <h2>Lost & Found</h2>
+      <p>Moderate and edit lost/found posts and control home-page preview visibility.</p>
+    </a>
+    <a class="panel-link" href="{{ url_for('admin.content_manager') }}">
+      <h2>Public Site Content</h2>
+      <p>Update hero text, mission copy, contact info, footer copy, and hot tips.</p>
+    </a>
+  </div>
+  <p><a class="text-link" href="{{ url_for('auth.logout') }}">Log Out</a></p>
+</section>
+{% endblock %}

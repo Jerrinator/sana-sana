@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <h1>Admin Lost & Found Moderation</h1>
+  <p>Approve, edit, or remove community posts. Keep content clear and appropriate for public preview.</p>
+  <div class="stacked-form" id="lostFoundSettingsBox">
+    <h2>Preview Settings</h2>
+    <label><input id="toggleLostFoundPreview" type="checkbox" /> Show Lost & Found preview on Home page</label>
+    <button class="btn" type="button" id="saveLostFoundPreviewSetting">Save Preview Setting</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Poster</th><th>Location</th><th>Date</th><th>Approved</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="lostFoundTableBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<dialog id="lostFoundModal" class="modal">
+  <form method="dialog" class="modal-content" id="lostFoundModalForm">
+    <input type="hidden" id="lfId" />
+    <h2>Edit Lost/Found Post</h2>
+    <input id="lfPoster" placeholder="Poster Name" required />
+    <input id="lfContact" placeholder="Contact" required />
+    <input id="lfLocation" placeholder="Location" required />
+    <input id="lfDate" type="date" required />
+    <textarea id="lfDescription" placeholder="Description" required></textarea>
+    <label><input id="lfApproved" type="checkbox" /> Approved</label>
+    <div class="cta-row">
+      <button class="btn" id="saveLostFoundEdit" value="default">Save</button>
+      <button class="btn btn-alt" id="closeLostFoundModal" value="cancel">Close</button>
+    </div>
+  </form>
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin_lostfound.js') }}" defer></script>
+{% endblock %}

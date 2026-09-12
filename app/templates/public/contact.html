@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <h1>Contact &amp; Location</h1>
+  <p>Come by for a wellness drink, a pilates class, or a slow afternoon reset in our cozy studio-cafe space.</p>
+  <div class="triple contact-grid">
+    <article class="info-block">
+      <h3>Visit</h3>
+      <p>Email: {{ site_content.contact_info.email }}</p>
+      <p>Phone: {{ site_content.contact_info.phone }}</p>
+      {% if site_content.contact_info.address %}
+        <p>Location: {{ site_content.contact_info.address }}</p>
+      {% endif %}
+      <p>Hours: Monday–Sunday | 7:00 AM–7:00 PM</p>
+      <p>Parking: Nearby public parking available.</p>
+    </article>
+    <article class="info-block">
+      <h3>Social Links</h3>
+      <p><a href="{{ site_content.contact_info.social.facebook }}" target="_blank" rel="noopener">Facebook</a></p>
+      <p><a href="{{ site_content.contact_info.social.instagram }}" target="_blank" rel="noopener">Instagram</a></p>
+    </article>
+    <article class="info-block contact-card-block">
+      <h3>Find Sana Sana</h3>
+      <img src="{{ url_for('static', filename='images/businesscard.jpeg') }}" alt="Sana Sana contact card with phone, social media, email, and address details" class="contact-card-image" />
+    </article>
+  </div>
+  <form id="contactForm" class="stacked-form">
+    <h2>Send a message</h2>
+    <input name="name" placeholder="Full name" required />
+    <input name="email" type="email" placeholder="Email" required />
+    <input name="phone" placeholder="Phone" />
+    <textarea name="message" placeholder="How can we help?" required></textarea>
+    <button class="btn" type="submit">Send Message</button>
+    <p class="muted" id="contactMsg"></p>
+  </form>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/contact.js') }}" defer></script>
+{% endblock %}

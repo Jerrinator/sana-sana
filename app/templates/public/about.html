@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section about-page">
+  <div class="about-hero">
+    <div>
+      <p class="eyebrow">About Us</p>
+      <h1>Wellness, nourishment, and movement in one beautiful place.</h1>
+    </div>
+    <img src="{{ url_for('static', filename='images/download (1).jpeg') }}" alt="Sana Sana mascot" class="about-mascot" />
+  </div>
+  <p>Sana Sana was created to blend two everyday essentials into one experience: a feel-good cafe and a grounded pilates studio. We believe wellness should be joyful, accessible, and deeply connected to community.</p>
+  <h2>Our story</h2>
+  <p>What started as a simple idea — a space where people could nourish themselves and move with intention — became a concept that combines fresh food, thoughtful routines, and a welcoming studio atmosphere.</p>
+  <h2>Our philosophy</h2>
+  <p>We center every decision around balance: fresh ingredients, mindful movement, warm hospitality, and a lifestyle that feels sustainable rather than rigid.</p>
+  <h2>What makes us different</h2>
+  <ul>
+    <li>Welcoming wellness spaces built for real life</li>
+    <li>Fresh cafe offerings that support daily energy</li>
+    <li>A pilates studio experience rooted in community and confidence</li>
+  </ul>
+  <h2>The Sana Sana concept</h2>
+  <div class="triple team-grid">
+    <article class="info-block"><h3>Fresh Cafe</h3><p>Bright, nourishing drinks and food crafted with intention.</p></article>
+    <article class="info-block"><h3>Mindful Movement</h3><p>Pilates designed to strengthen and restore.</p></article>
+    <article class="info-block"><h3>Whole-Body Wellness</h3><p>A lifestyle that feels balanced, uplifting, and sustainable.</p></article>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <h1>Admin Site Content Editor</h1>
+  <form id="contentForm" class="stacked-form">
+    <h2>Core Content</h2>
+    <textarea name="hero_text" placeholder="Hero text" required></textarea>
+    <textarea name="mission_snapshot" placeholder="Mission snapshot" required></textarea>
+    <input name="banner_image" placeholder="Banner image path, e.g. images/banner.jpg" />
+    <textarea name="about_text_blocks" placeholder="About text blocks (one paragraph per line)"></textarea>
+    <textarea name="footer_text" placeholder="Footer text" required></textarea>
+    <label><input type="checkbox" name="lostfound_preview_enabled" /> Enable Lost & Found preview on Home</label>
+
+    <h2>Contact Info</h2>
+    <input name="contact_email" placeholder="Email" required />
+    <input name="contact_phone" placeholder="Phone" required />
+    <input name="contact_address" placeholder="Address" />
+    <input name="social_facebook" placeholder="Facebook URL" />
+    <input name="social_instagram" placeholder="Instagram URL" />
+
+    <button class="btn" type="submit">Save Site Content</button>
+  </form>
+</section>
+
+<section class="container section">
+  <h2>Hot Tips Manager</h2>
+  <form id="tipForm" class="stacked-form">
+    <input type="hidden" name="tip_id" />
+    <input name="title" placeholder="Tip title" required />
+    <textarea name="description" placeholder="Tip description" required></textarea>
+    <input name="category" placeholder="Category (Summer, Winter, Travel, Health, General)" required />
+    <div class="cta-row">
+      <button class="btn" type="submit">Save Tip</button>
+      <button type="button" class="btn btn-alt" id="tipReset">Reset</button>
+    </div>
+  </form>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Title</th><th>Category</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="tipsTableBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<dialog id="contentModal" class="modal">
+  <div class="modal-content">
+    <h2>Update Complete</h2>
+    <p>Site content changes are saved and available immediately.</p>
+    <button class="btn" id="closeContentModal">Close</button>
+  </div>
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin_content.js') }}" defer></script>
+{% endblock %}

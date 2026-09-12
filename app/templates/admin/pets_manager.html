@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="container section">
+  <h1>Admin Adoptable Pets Manager</h1>
+  <form id="petForm" class="stacked-form" enctype="multipart/form-data">
+    <input type="hidden" name="id" />
+    <input name="name" placeholder="Name" required />
+    <input name="age" placeholder="Age" required />
+    <input name="breed" placeholder="Breed" required />
+    <textarea name="personality" placeholder="Personality" required></textarea>
+    <textarea name="medical" placeholder="Medical" required></textarea>
+    <textarea name="requirements" placeholder="Requirements" required></textarea>
+    <label>Featured Order <input name="featured_order" type="number" min="0" value="999" /></label>
+    <label><input type="checkbox" name="urgent" value="true" /> Mark as urgent</label>
+    <label><input type="checkbox" name="adopted" value="true" /> Mark as adopted</label>
+    <input type="file" name="photos" id="petPhotos" accept="image/png,image/jpeg" multiple />
+    <div id="petPreview" class="preview-row"></div>
+    <div class="cta-row">
+      <button class="btn" type="submit">Save Pet</button>
+      <button class="btn btn-alt" type="button" id="petFormReset">Reset</button>
+    </div>
+  </form>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Breed</th><th>Urgent</th><th>Adopted</th><th>Featured</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="petsTableBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<dialog id="petEditModal" class="modal">
+  <div class="modal-content">
+    <h2>Edit Pet</h2>
+    <p>Use the form above to update details. Current record selected.</p>
+    <button class="btn" id="closePetModal">Close</button>
+  </div>
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin_pets.js') }}" defer></script>
+{% endblock %}
