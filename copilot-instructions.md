@@ -12,6 +12,8 @@ Decorative talavera-style border/background tiles live in `app/static/images/bor
 
 Treat these like floor tiles: they can be combined in patterns (alternating, checkerboard, etc.) rather than only used individually. `border_pattern_strip.png` in the same folder is a generated composite laid out as a 2-column x 3-row repeat unit (24x24px cells at 1x, saved at 2x for retina, 48x72px total): the left column is `tile2` in all three rows, and the right column is `tile2` on top and bottom with `tile3` (frog) in the middle — mirroring the original `bordertile_3row.png` layout (dark tile border top/bottom, frog alternating in the middle row). This is what `.artesania-header-bar` in `app/static/css/style.css` uses for the top-of-page border. Regenerate this strip (or create new composites) with Pillow if the tiles or pattern change — do not hand-edit the composite PNG directly, and preserve tile3's transparency when doing so.
 
+The shared card rule (`.hero-copy, .hero-card, .card, .info-block, .stacked-form, .modal-content`) in `app/static/css/style.css` uses `tile1` directly as a CSS `border-image`: `border-image-slice: 300` crops just tile1's own outer decorative band (its center is plain terracotta and is discarded, not stretched with `fill`), giving every card site-wide a thin talavera-patterned frame.
+
 ## Deployment Overview & Rules
 
 - **Heroku App Name:** `sana-sana-cafe`

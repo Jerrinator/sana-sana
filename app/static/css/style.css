@@ -416,7 +416,12 @@ a {
 .stacked-form,
 .modal-content {
   background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(73, 109, 77, 0.14);
+  border: 8px solid transparent;
+  /* thin talavera frame using border_tiles/tile1's own outer decorative band; slice keeps its plain center out */
+  border-image-source: url("../images/border_tiles/border_design_tile1.png");
+  border-image-slice: 300;
+  border-image-width: 8px;
+  border-image-repeat: round;
   border-radius: 28px;
   box-shadow: 0 24px 60px rgba(60, 73, 46, 0.06);
 }
