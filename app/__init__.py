@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template, request
 from dotenv import load_dotenv
 
 from app.blueprints.public import public_bp
@@ -35,6 +35,7 @@ def create_app() -> Flask:
     app.config["MAIL_RECIPIENT_OVERRIDE"] = os.getenv("MAIL_RECIPIENT_OVERRIDE", "")
     app.config["MAIL_SEND_SYNC"] = os.getenv("MAIL_SEND_SYNC", "false").lower() == "true"
     app.config["STORE_IMAGES_IN_ASTRA"] = os.getenv("STORE_IMAGES_IN_ASTRA", "false").lower() == "true"
+    app.config["SITE_ENABLED"] = os.getenv("SITE_ENABLED", "true").lower() in {"1", "true", "on", "yes"}
     try:
         app.config["ASTRA_INLINE_IMAGE_MAX_BYTES"] = int(os.getenv("ASTRA_INLINE_IMAGE_MAX_BYTES", "5600"))
     except ValueError:
@@ -49,6 +50,12 @@ def create_app() -> Flask:
     app.register_blueprint(auth_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(api_bp)
+
+    @app.before_request
+    def enforce_site_enabled():
+        if app.config["SITE_ENABLED"] or request.path.startswith("/static"):
+            return None
+        return render_template("public/unavailable.html"), 503
 
     @app.after_request
     def add_header(response):

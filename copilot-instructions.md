@@ -64,6 +64,15 @@ Verify that the site is active and returning HTTP `200`:
 curl -I --max-time 30 https://sana-sana-cafe-c6067fd2c0e7.herokuapp.com/
 ```
 
+## Maintenance Mode
+
+The `SITE_ENABLED` env var (`.env` locally, Heroku config var in production) toggles the whole site:
+
+- `SITE_ENABLED=true` (default) — site behaves normally.
+- `SITE_ENABLED=false` — every route except `/static/*` returns the `public/unavailable.html` maintenance page with HTTP `503`, regardless of database or other backend state.
+
+This is enforced by a `before_request` hook in `app/__init__.py`. Toggle it in production with `heroku config:set SITE_ENABLED=false -a sana-sana-cafe` and restore with `SITE_ENABLED=true`.
+
 ## Required Integrated Runtime Configuration
 
 The integrated image must run the normal rescue app through `run.py` and must register the assistant only when:
