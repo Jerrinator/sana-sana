@@ -69,11 +69,12 @@ a {
 }
 
 .artesania-header-bar {
-  height: 36px;
-  background-image: url("../images/bordertile.png");
+  height: 72px;
+  background-color: var(--sana-cream);
+  background-image: url("../images/bordertile_3row.png");
   background-repeat: repeat-x;
-  background-position: center;
-  background-size: auto 36px;
+  background-position: left top;
+  background-size: 48px 72px;
   width: 100%;
 }
 
