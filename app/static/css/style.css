@@ -209,6 +209,20 @@ a {
   text-decoration: underline;
   font-weight: 600;
   white-space: nowrap;
+}
+
+.nav-divider-sm {
+  font-size: 0.78rem;
+  color: rgba(34, 60, 40, 0.3);
+  margin: 0 0.15rem;
+}
+
+.nav-signup-link {
+  font-size: 0.78rem;
+  color: var(--sana-forest);
+  text-decoration: underline;
+  font-weight: 700;
+  white-space: nowrap;
   padding-right: 0.3rem;
 }
 
