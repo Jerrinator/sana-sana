@@ -2,6 +2,16 @@
 
 These instructions apply when deploying the Sana Sana Cafe Flask web application to Heroku.
 
+## Border Tile Assets
+
+Decorative talavera-style border/background tiles live in `app/static/images/border_tiles/`:
+
+- `border_design_tile1.png` — a floral picture-frame tile (cream lattice/flower motif on terracotta). It is a full frame design but is also repeatable/tileable, so it can be used as its own repeating border in addition to being combined with other tiles.
+- `border_design_tile2.png` — a flower medallion tile (cream 8-petal ring around a forest-green center dot on terracotta), meant as the **preferred** tile for building borders.
+- `border_design_tile3.png` — the site's frog mascot, repurposed as a border tile. Its background is intentionally transparent (lets the header bar's cream background show through) — do not fill or flatten this transparency.
+
+Treat these like floor tiles: they can be combined in patterns (alternating, checkerboard, etc.) rather than only used individually. `border_pattern_strip.png` in the same folder is a generated composite laid out as a 2-column x 3-row repeat unit (24x24px cells at 1x, saved at 2x for retina, 48x72px total): the left column is `tile2` in all three rows, and the right column is `tile2` on top and bottom with `tile3` (frog) in the middle — mirroring the original `bordertile_3row.png` layout (dark tile border top/bottom, frog alternating in the middle row). This is what `.artesania-header-bar` in `app/static/css/style.css` uses for the top-of-page border. Regenerate this strip (or create new composites) with Pillow if the tiles or pattern change — do not hand-edit the composite PNG directly, and preserve tile3's transparency when doing so.
+
 ## Deployment Overview & Rules
 
 - **Heroku App Name:** `sana-sana-cafe`

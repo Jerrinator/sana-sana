@@ -71,7 +71,8 @@ a {
 .artesania-header-bar {
   height: 72px;
   background-color: var(--sana-cream);
-  background-image: url("../images/bordertile_3row.png");
+  /* 2-col x 3-row repeat unit: tile2 fills every cell except the middle-right cell, which alternates in tile3 (frog, transparent bg) */
+  background-image: url("../images/border_tiles/border_pattern_strip.png");
   background-repeat: repeat-x;
   background-position: left top;
   background-size: 48px 72px;
