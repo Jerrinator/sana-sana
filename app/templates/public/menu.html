@@ -1,77 +1,76 @@
 {% extends 'base.html' %}
 {% block content %}
 <section class="container section">
-  <div class="menu-page-intro">
-    <p class="eyebrow">Cafe &amp; Menu</p>
-    <h1>Meals that feel like home.</h1>
-    <p class="lead">Protein-packed drinks and comforting meal prep with clear macros, fresh restocks, and flavors worth coming back for.</p>
+  <header class="menu-hero">
+    <div class="menu-hero-copy">
+      <p class="eyebrow">The Sana Sana counter</p>
+      <h1>Eat well. Feel held.</h1>
+      <p class="lead">Comfort food, protein-forward drinks, and a weekly restock rhythm made for real life.</p>
+      <div class="menu-hero-actions">
+        <a class="btn" href="#featured-restock">See what is fresh</a>
+        <span class="menu-status"><span class="menu-status-dot"></span> Restock varies weekly</span>
+      </div>
+    </div>
+    <div class="menu-hero-note">
+      <span class="menu-note-mark">01</span>
+      <p>Choose by mood, then check the numbers.</p>
+      <strong>Protein, comfort, no guesswork.</strong>
+    </div>
+  </header>
+
+  <div class="menu-rhythm" aria-label="Sana Sana menu categories">
+    <span class="menu-rhythm-label">Your rhythm</span>
+    <span><b>01</b> Sip something bright</span>
+    <span><b>02</b> Pick a proper meal</span>
+    <span><b>03</b> Keep your goals close</span>
   </div>
 
-  <div class="triple" style="margin-bottom: 2.5rem;">
-    <article class="info-block card-arched">
-      <h3>Garden Glow</h3>
-      <p>Cucumber, mint, lime, and vibrant greens for a clean reset.</p>
-      <p class="muted" style="margin-top: 0.5rem; font-size: 0.88rem;">✨ <strong>Benefits:</strong> Deep hydration, digestive balance, and instant skin radiance.</p>
-    </article>
-    <article class="info-block card-arched">
-      <h3>Golden Ritual Tonic</h3>
-      <p>Organic turmeric, ginger, citrus, and raw local honey.</p>
-      <p class="muted" style="margin-top: 0.5rem; font-size: 0.88rem;">✨ <strong>Benefits:</strong> Anti-inflammatory support, immune boost, and joint recovery.</p>
-    </article>
-    <article class="info-block card-arched">
-      <h3>Studio Recovery Smoothie</h3>
-      <p>Plant protein, banana, almond butter, dates, and cacao.</p>
-      <p class="muted" style="margin-top: 0.5rem; font-size: 0.88rem;">✨ <strong>Benefits:</strong> Muscle repair, sustained energy, and healthy core recovery.</p>
-    </article>
-  </div>
   <div class="menu-showcase">
     <figure class="menu-feature">
-      <img src="{{ url_for('static', filename='images/menu-items/drink-and-wellness-menu.png') }}" alt="Sana Sana drinks and wellness menu" class="menu-feature-image" />
-      <figcaption>Explore the Sana Sana menu</figcaption>
+      <div class="menu-feature-frame">
+        <img src="{{ url_for('static', filename='images/menu-items/drink-and-wellness-menu.png') }}" alt="Sana Sana drinks and wellness menu" class="menu-feature-image" />
+      </div>
+      <figcaption><span>01 / Drinks &amp; wellness</span> Juices, shots, lattes, matcha, and horchata.</figcaption>
     </figure>
 
-    <section class="menu-restock" aria-labelledby="menu-restock-heading">
-    <div class="section-heading-row">
-      <div>
-        <p class="eyebrow">Featured restock</p>
-        <h2 id="menu-restock-heading">Comfort food, packed with protein.</h2>
+    <section class="menu-restock" id="featured-restock" aria-labelledby="menu-restock-heading">
+      <div class="menu-section-intro">
+        <p class="eyebrow">This week, or soon</p>
+        <h2 id="menu-restock-heading">The comfort-food edit.</h2>
+        <p>Meals that feel like home, with the macros in plain sight.</p>
       </div>
-      <span class="mini-pill">Macros included</span>
-    </div>
-    <div class="menu-food-grid">
-      <figure class="menu-food-card">
-          <img src="{{ url_for('static', filename='images/menu-items/Chicken Al Pastor Tacos.jpg') }}" alt="Chicken Al Pastor tacos with nutrition information" />
-        <figcaption><strong>Chicken Al Pastor Tacos</strong><span>532 calories · 54g protein</span></figcaption>
-      </figure>
-      <figure class="menu-food-card">
-          <img src="{{ url_for('static', filename='images/menu-items/Mexican Street Corn Pasta Salad.jpg') }}" alt="Mexican Street Corn Pasta Salad with nutrition information" />
-        <figcaption><strong>Mexican Street Corn Pasta Salad</strong><span>581 calories · 58g protein</span></figcaption>
-      </figure>
-      <figure class="menu-food-card">
-        <img src="{{ url_for('static', filename='images/menu-items/Protein Chicken Alfredo.jpg') }}" alt="Protein Chicken Alfredo with nutrition information" />
-        <figcaption><strong>Protein Chicken Alfredo</strong><span>356 calories · 36.5g protein</span></figcaption>
-      </figure>
-      <figure class="menu-food-card">
-          <img src="{{ url_for('static', filename='images/menu-items/Protein Pumpkin Spice Horchata.jpg') }}" alt="Protein Pumpkin Spice Horchata with nutrition information" />
-        <figcaption><strong>Protein Pumpkin Spice Horchata</strong><span>322 calories · 34g protein</span></figcaption>
-      </figure>
+      <div class="menu-food-grid">
+        <figure class="menu-food-card menu-food-card-featured">
+          <img src="{{ url_for('static', filename='images/menu-items/Chicken Fried Rice.png') }}" alt="Chicken Fried Rice with nutrition information" />
+          <figcaption><strong>Chicken Fried Rice</strong><span>540 cal · 60.7g protein · $8</span></figcaption>
+        </figure>
         <figure class="menu-food-card">
           <img src="{{ url_for('static', filename='images/menu-items/Protein Pollo Asado & Rice Bowl.png') }}" alt="Protein Pollo Asado and Rice Bowl with nutrition information" />
-          <figcaption><strong>Protein Pollo Asado and Rice Bowl</strong><span>586 calories · 55g protein</span></figcaption>
+          <figcaption><strong>Pollo Asado &amp; Rice Bowl</strong><span>586 cal · 55g protein</span></figcaption>
         </figure>
-    </div>
+        <figure class="menu-food-card">
+          <img src="{{ url_for('static', filename='images/menu-items/Chicken Al Pastor Tacos.jpg') }}" alt="Chicken Al Pastor tacos with nutrition information" />
+          <figcaption><strong>Chicken Al Pastor Tacos</strong><span>532 cal · 54g protein</span></figcaption>
+        </figure>
+        <figure class="menu-food-card">
+          <img src="{{ url_for('static', filename='images/menu-items/Protein Fresas Con Crema With Granola.jpg') }}" alt="Protein Fresas Con Crema with granola and nutrition information" />
+          <figcaption><strong>Fresas Con Crema + Granola</strong><span>394 cal · 42g protein</span></figcaption>
+        </figure>
+        <figure class="menu-food-card">
+          <img src="{{ url_for('static', filename='images/menu-items/Protein Chicken Alfredo.jpg') }}" alt="Protein Chicken Alfredo with nutrition information" />
+          <figcaption><strong>Protein Chicken Alfredo</strong><span>356 cal · 36.5g protein</span></figcaption>
+        </figure>
+        <figure class="menu-food-card">
+          <img src="{{ url_for('static', filename='images/menu-items/Protein Pumpkin Spice Horchata.jpg') }}" alt="Protein Pumpkin Spice Horchata with nutrition information" />
+          <figcaption><strong>Protein Pumpkin Spice Horchata</strong><span>322 cal · 34g protein</span></figcaption>
+        </figure>
+      </div>
     </section>
   </div>
 
   <div class="community-service menu-access-note">
     <p class="eyebrow">Everyone belongs here</p>
     <p>If getting upstairs to the farmstand is difficult because of a disability or mobility barrier, message us. We will personally deliver your order at no charge.</p>
-  </div>
-
-  <div class="triple menu-notes">
-    <article class="info-block"><h3>Before class</h3><p>Start with something fresh and energizing before you move.</p></article>
-    <article class="info-block"><h3>After class</h3><p>Settle in with a nourishing bite and a drink made for recovery.</p></article>
-    <article class="info-block"><h3>Anytime</h3><p>Stay awhile. The cafe is here for slow mornings and easy afternoons.</p></article>
   </div>
 </section>
 {% endblock %}
