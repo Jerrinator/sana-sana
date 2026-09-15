@@ -604,6 +604,65 @@ a {
   text-transform: uppercase;
 }
 
+.menu-restock {
+  margin: 0 auto 2.5rem;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  background: rgba(252, 249, 244, 0.72);
+  border: 1px solid var(--sana-line);
+  border-radius: 12px;
+  box-shadow: var(--sana-shadow);
+}
+
+.menu-restock .section-heading-row {
+  align-items: end;
+}
+
+.menu-restock h2 {
+  margin-bottom: 0;
+}
+
+.menu-food-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.menu-food-card {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  background: var(--sana-soft);
+  border: 1px solid var(--sana-line);
+  border-radius: 10px;
+}
+
+.menu-food-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center;
+  background: var(--sana-sand);
+}
+
+.menu-food-card figcaption {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.8rem;
+  color: var(--sana-ink);
+  font-size: 0.9rem;
+  line-height: 1.25;
+}
+
+.menu-food-card figcaption strong {
+  color: var(--sana-forest);
+}
+
+.menu-food-card figcaption span {
+  color: var(--sana-terracotta);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 .menu-notes {
   margin-top: 1.5rem;
 }
@@ -1067,6 +1126,10 @@ td {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .menu-food-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .footer-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -1083,6 +1146,10 @@ td {
 
   .triple {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .menu-food-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .hero {
