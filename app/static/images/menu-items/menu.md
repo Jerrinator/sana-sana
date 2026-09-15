@@ -2,6 +2,12 @@
 
 This folder is the canonical home for menu-specific food and drink artwork. Keep filenames stable so menu references remain easy to update.
 
+## Beverage Menu
+
+| Menu asset | Contents |
+| --- | --- |
+| [drink-and-wellness-menu.png](drink-and-wellness-menu.png) | Fresh cold-pressed juices, wellness shots, protein lattes, aguas, matcha drinks, and horchatas |
+
 ## Current Items
 
 | Menu item | Image asset | Calories | Protein | Carbs | Fat | Price |
