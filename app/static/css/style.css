@@ -684,6 +684,32 @@ a {
   margin-top: 1.5rem;
 }
 
+.community-service {
+  margin: 2rem 0;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  background: rgba(34, 60, 40, 0.08);
+  border: 1px solid rgba(34, 60, 40, 0.2);
+  border-left: 6px solid var(--sana-forest);
+  border-radius: 10px;
+}
+
+.community-service h2,
+.community-service p {
+  max-width: 48rem;
+}
+
+.community-service h2 {
+  margin-bottom: 0.55rem;
+}
+
+.community-service p:last-child {
+  margin-bottom: 0;
+}
+
+.menu-access-note {
+  margin-top: 0;
+}
+
 .contact-card-block {
   display: grid;
   align-content: start;
