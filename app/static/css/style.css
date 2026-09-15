@@ -574,7 +574,7 @@ a {
 }
 
 .menu-feature {
-  margin: 0 auto 2.5rem;
+  margin: 0;
   padding: 0;
   max-width: 100%;
   background: transparent;
@@ -605,7 +605,7 @@ a {
 }
 
 .menu-restock {
-  margin: 0 auto 2.5rem;
+  margin: 0;
   padding: clamp(1.2rem, 3vw, 2rem);
   background: rgba(252, 249, 244, 0.72);
   border: 1px solid var(--sana-line);
@@ -623,8 +623,8 @@ a {
 
 .menu-food-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
 }
 
 .menu-food-card {
@@ -634,6 +634,12 @@ a {
   background: var(--sana-soft);
   border: 1px solid var(--sana-line);
   border-radius: 10px;
+  box-shadow: 0 10px 22px rgba(43, 31, 26, 0.08);
+  transform: rotate(-1.5deg);
+}
+
+.menu-food-card:nth-child(2n) {
+  transform: rotate(1.5deg);
 }
 
 .menu-food-card img {
@@ -661,6 +667,17 @@ a {
   color: var(--sana-terracotta);
   font-size: 0.78rem;
   font-weight: 700;
+}
+
+.menu-showcase {
+  display: grid;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.menu-showcase .menu-feature-image {
+  max-height: 72rem;
+  object-fit: contain;
 }
 
 .menu-notes {
@@ -1149,7 +1166,12 @@ td {
   }
 
   .menu-food-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .menu-showcase {
+    grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+    align-items: start;
   }
 
   .hero {
