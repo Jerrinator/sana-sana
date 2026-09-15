@@ -1,72 +1,52 @@
 {% extends 'base.html' %}
 {% block content %}
 <section class="container section">
-  <header class="menu-hero">
-    <div class="menu-hero-copy">
-      <p class="eyebrow">The Sana Sana counter</p>
-      <h1>Eat well. Feel held.</h1>
-      <p class="lead">Comfort food, protein-forward drinks, and a weekly restock rhythm made for real life.</p>
-      <div class="menu-hero-actions">
-        <a class="btn" href="#featured-restock">See what is fresh</a>
-        <span class="menu-status"><span class="menu-status-dot"></span> Restock varies weekly</span>
-      </div>
+  <header class="menu-masthead">
+    <div class="menu-masthead-top"><span>Sana Sana / Cafe + Studio</span><span>Issue 06 / Eat well, feel held</span></div>
+    <div class="menu-masthead-main">
+      <p class="eyebrow">The weekly counter</p>
+      <h1>Food with a<br /><em>point of view.</em></h1>
+      <p class="menu-masthead-copy">Bright sips. Proper meals. Protein you can see. The menu changes with the week, but the feeling stays the same.</p>
+      <a class="menu-arrow-link" href="#meals">Scroll to the good part <span>↓</span></a>
     </div>
-    <div class="menu-hero-note">
-      <span class="menu-note-mark">01</span>
-      <p>Choose by mood, then check the numbers.</p>
-      <strong>Protein, comfort, no guesswork.</strong>
-    </div>
+    <div class="menu-masthead-side"><span>01</span><strong>SIP<br />NOURISH<br />THRIVE</strong><small>clear macros<br />warm food<br />local care</small></div>
   </header>
 
-  <div class="menu-rhythm" aria-label="Sana Sana menu categories">
-    <span class="menu-rhythm-label">Your rhythm</span>
-    <span><b>01</b> Sip something bright</span>
-    <span><b>02</b> Pick a proper meal</span>
-    <span><b>03</b> Keep your goals close</span>
-  </div>
+  <section class="drink-world" aria-labelledby="drink-world-title">
+    <div class="section-label"><span>01</span><p>Drinks &amp; wellness</p><span class="section-rule"></span><small>start here</small></div>
+    <div class="drink-world-grid">
+      <div class="drink-board-wrap">
+        <img src="{{ url_for('static', filename='images/menu-items/drink-and-wellness-menu.png') }}" alt="Sana Sana drinks and wellness menu" class="drink-board" />
+        <span class="board-caption">The full pour / juices, shots, lattes, matcha &amp; horchata</span>
+      </div>
+      <div class="drink-notes">
+        <p class="eyebrow">Pick your pace</p>
+        <h2>A little green.<br /><em>A little sweet.</em></h2>
+        <p>Cold-pressed juices for the reset, protein lattes for the long day, and horchata when comfort is the assignment.</p>
+        <div class="drink-mini-grid">
+          <figure><img src="{{ url_for('static', filename='images/menu-items/Sana Horchata.jpg') }}" alt="Sana Horchata" /><figcaption>Sana Horchata <b>266 cal</b></figcaption></figure>
+          <figure><img src="{{ url_for('static', filename='images/menu-items/Protein Chai Latte.jpg') }}" alt="Protein Chai Latte" /><figcaption>Protein Chai <b>308 cal</b></figcaption></figure>
+          <figure><img src="{{ url_for('static', filename='images/menu-items/Colita de Rana.jpg') }}" alt="Colita de Rana green juice" /><figcaption>Colita de Rana <b>fresh</b></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="menu-showcase">
-    <figure class="menu-feature">
-      <div class="menu-feature-frame">
-        <img src="{{ url_for('static', filename='images/menu-items/drink-and-wellness-menu.png') }}" alt="Sana Sana drinks and wellness menu" class="menu-feature-image" />
-      </div>
-      <figcaption><span>01 / Drinks &amp; wellness</span> Juices, shots, lattes, matcha, and horchata.</figcaption>
-    </figure>
-
-    <section class="menu-restock" id="featured-restock" aria-labelledby="menu-restock-heading">
-      <div class="menu-section-intro">
-        <p class="eyebrow">This week, or soon</p>
-        <h2 id="menu-restock-heading">The comfort-food edit.</h2>
-        <p>Meals that feel like home, with the macros in plain sight.</p>
-      </div>
-      <div class="menu-food-grid">
-        <figure class="menu-food-card menu-food-card-featured">
-          <img src="{{ url_for('static', filename='images/menu-items/Chicken Fried Rice.png') }}" alt="Chicken Fried Rice with nutrition information" />
-          <figcaption><strong>Chicken Fried Rice</strong><span>540 cal · 60.7g protein · $8</span></figcaption>
-        </figure>
-        <figure class="menu-food-card">
-          <img src="{{ url_for('static', filename='images/menu-items/Protein Pollo Asado & Rice Bowl.png') }}" alt="Protein Pollo Asado and Rice Bowl with nutrition information" />
-          <figcaption><strong>Pollo Asado &amp; Rice Bowl</strong><span>586 cal · 55g protein</span></figcaption>
-        </figure>
-        <figure class="menu-food-card">
-          <img src="{{ url_for('static', filename='images/menu-items/Chicken Al Pastor Tacos.jpg') }}" alt="Chicken Al Pastor tacos with nutrition information" />
-          <figcaption><strong>Chicken Al Pastor Tacos</strong><span>532 cal · 54g protein</span></figcaption>
-        </figure>
-        <figure class="menu-food-card">
-          <img src="{{ url_for('static', filename='images/menu-items/Protein Fresas Con Crema With Granola.jpg') }}" alt="Protein Fresas Con Crema with granola and nutrition information" />
-          <figcaption><strong>Fresas Con Crema + Granola</strong><span>394 cal · 42g protein</span></figcaption>
-        </figure>
-        <figure class="menu-food-card">
-          <img src="{{ url_for('static', filename='images/menu-items/Protein Chicken Alfredo.jpg') }}" alt="Protein Chicken Alfredo with nutrition information" />
-          <figcaption><strong>Protein Chicken Alfredo</strong><span>356 cal · 36.5g protein</span></figcaption>
-        </figure>
-        <figure class="menu-food-card">
-          <img src="{{ url_for('static', filename='images/menu-items/Protein Pumpkin Spice Horchata.jpg') }}" alt="Protein Pumpkin Spice Horchata with nutrition information" />
-          <figcaption><strong>Protein Pumpkin Spice Horchata</strong><span>322 cal · 34g protein</span></figcaption>
-        </figure>
-      </div>
-    </section>
-  </div>
+  <section class="meal-world" id="meals" aria-labelledby="meal-world-title">
+    <div class="section-label"><span>02</span><p>Meal prep / restock</p><span class="section-rule"></span><small>the main event</small></div>
+    <div class="meal-world-heading">
+      <div><p class="eyebrow">This week, or soon</p><h2 id="meal-world-title">The comfort-food<br /><em>lineup.</em></h2></div>
+      <p>Real meals, clear numbers, no wellness theater. Availability follows the weekly restock.</p>
+    </div>
+    <div class="meal-collage">
+      <figure class="meal-card meal-card-tall"><img src="{{ url_for('static', filename='images/menu-items/Chicken Fried Rice.png') }}" alt="Chicken Fried Rice with nutrition information" /><figcaption><strong>Chicken Fried Rice</strong><span>540 cal / 60.7g protein / $8</span></figcaption></figure>
+      <figure class="meal-card meal-card-wide"><img src="{{ url_for('static', filename='images/menu-items/Protein Pollo Asado & Rice Bowl.png') }}" alt="Protein Pollo Asado and Rice Bowl with nutrition information" /><figcaption><strong>Pollo Asado &amp; Rice Bowl</strong><span>586 cal / 55g protein</span></figcaption></figure>
+      <figure class="meal-card"><img src="{{ url_for('static', filename='images/menu-items/Chicken Al Pastor Tacos.jpg') }}" alt="Chicken Al Pastor tacos with nutrition information" /><figcaption><strong>Al Pastor Tacos</strong><span>532 cal / 54g protein</span></figcaption></figure>
+      <figure class="meal-card"><img src="{{ url_for('static', filename='images/menu-items/Protein Fresas Con Crema With Granola.jpg') }}" alt="Protein Fresas Con Crema with granola" /><figcaption><strong>Fresas + Granola</strong><span>394 cal / 42g protein</span></figcaption></figure>
+      <figure class="meal-card meal-card-dark"><img src="{{ url_for('static', filename='images/menu-items/Grilled Chicken Teriyaki Steamed White Rice and Broccoli.jpg') }}" alt="Grilled Chicken Teriyaki with steamed white rice and broccoli" /><figcaption><strong>Teriyaki Chicken</strong><span>468 cal / 50g protein</span></figcaption></figure>
+      <figure class="meal-card"><img src="{{ url_for('static', filename='images/menu-items/Protein Chicken Alfredo.jpg') }}" alt="Protein Chicken Alfredo with nutrition information" /><figcaption><strong>Protein Chicken Alfredo</strong><span>356 cal / 36.5g protein</span></figcaption></figure>
+    </div>
+  </section>
 
   <div class="community-service menu-access-note">
     <p class="eyebrow">Everyone belongs here</p>

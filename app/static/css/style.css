@@ -1395,3 +1395,387 @@ td {
     font-size: 2.5rem;
   }
 }
+
+/* Menu editorial composition */
+.menu-masthead {
+  position: relative;
+  min-height: 34rem;
+  margin: -1rem 0 4rem;
+  padding: 1.1rem clamp(1.2rem, 4vw, 4rem) 3rem;
+  overflow: hidden;
+  color: var(--sana-soft);
+  background: var(--sana-terracotta);
+}
+
+.menu-masthead::before {
+  content: "";
+  position: absolute;
+  width: 38rem;
+  height: 38rem;
+  right: -13rem;
+  top: 5rem;
+  border: 1px solid rgba(248, 244, 236, 0.38);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2rem rgba(248, 244, 236, 0.08), 0 0 0 5rem rgba(248, 244, 236, 0.05);
+}
+
+.menu-masthead-top,
+.menu-masthead-main,
+.menu-masthead-side {
+  position: relative;
+  z-index: 1;
+}
+
+.menu-masthead-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(248, 244, 236, 0.4);
+  color: rgba(248, 244, 236, 0.78);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.menu-masthead-main {
+  max-width: 48rem;
+  padding-top: clamp(4rem, 10vw, 8rem);
+}
+
+.menu-masthead .eyebrow {
+  color: var(--sana-lime);
+}
+
+.menu-masthead h1 {
+  margin-bottom: 1.2rem;
+  color: var(--sana-soft);
+  font-size: clamp(4rem, 11vw, 9rem);
+  line-height: 0.79;
+}
+
+.menu-masthead h1 em,
+.drink-notes h2 em,
+.meal-world-heading h2 em {
+  color: var(--sana-lime);
+  font-weight: 500;
+}
+
+.menu-masthead-copy {
+  max-width: 26rem;
+  color: rgba(248, 244, 236, 0.83);
+  font-size: 1rem;
+}
+
+.menu-arrow-link {
+  display: inline-flex;
+  gap: 0.8rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  color: var(--sana-soft);
+  font-weight: 800;
+  border-bottom: 1px solid rgba(248, 244, 236, 0.5);
+  padding-bottom: 0.3rem;
+}
+
+.menu-arrow-link span {
+  color: var(--sana-lime);
+  font-size: 1.4rem;
+}
+
+.menu-masthead-side {
+  position: absolute;
+  right: clamp(1.5rem, 8vw, 8rem);
+  bottom: 2.5rem;
+  display: grid;
+  gap: 0.7rem;
+  max-width: 9rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(248, 244, 236, 0.42);
+}
+
+.menu-masthead-side span {
+  color: var(--sana-lime);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.menu-masthead-side strong {
+  color: var(--sana-soft);
+  font-size: 1.35rem;
+  letter-spacing: 0.08em;
+  line-height: 0.95;
+}
+
+.menu-masthead-side small {
+  color: rgba(248, 244, 236, 0.68);
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--sana-terracotta);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.section-label p,
+.section-label small {
+  margin: 0;
+}
+
+.section-label > span:first-child {
+  color: var(--sana-forest);
+}
+
+.section-label small {
+  color: var(--sana-moss);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+}
+
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--sana-line);
+}
+
+.drink-world {
+  margin-bottom: clamp(4rem, 9vw, 8rem);
+}
+
+.drink-world-grid {
+  display: grid;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.drink-board-wrap {
+  position: relative;
+  padding: clamp(0.8rem, 2vw, 1.4rem);
+  background: var(--sana-sand);
+  transform: rotate(-1.2deg);
+  box-shadow: 12px 16px 0 rgba(34, 60, 40, 0.12);
+}
+
+.drink-board {
+  display: block;
+  width: 100%;
+  max-height: 62rem;
+  object-fit: contain;
+  background: var(--sana-soft);
+}
+
+.board-caption {
+  display: block;
+  padding-top: 0.8rem;
+  color: var(--sana-terracotta);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.35rem;
+}
+
+.drink-notes {
+  align-self: center;
+  padding: clamp(0.5rem, 2vw, 1.5rem) 0;
+}
+
+.drink-notes h2 {
+  margin-bottom: 1rem;
+  color: var(--sana-forest);
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  line-height: 0.84;
+}
+
+.drink-notes > p:not(.eyebrow) {
+  max-width: 26rem;
+  color: rgba(43, 31, 26, 0.72);
+}
+
+.drink-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-top: 2rem;
+}
+
+.drink-mini-grid figure {
+  margin: 0;
+}
+
+.drink-mini-grid figure:nth-child(2) {
+  transform: translateY(1rem);
+}
+
+.drink-mini-grid img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 1px solid var(--sana-line);
+  background: var(--sana-soft);
+}
+
+.drink-mini-grid figcaption {
+  display: grid;
+  gap: 0.15rem;
+  padding-top: 0.45rem;
+  color: var(--sana-forest);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.drink-mini-grid figcaption b {
+  color: var(--sana-terracotta);
+  font-size: 0.67rem;
+}
+
+.meal-world {
+  margin-bottom: 4rem;
+  padding: clamp(1.2rem, 4vw, 3rem) 0;
+  border-top: 1px solid var(--sana-line);
+}
+
+.meal-world-heading {
+  display: grid;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 2rem;
+}
+
+.meal-world-heading h2 {
+  margin-bottom: 0;
+  color: var(--sana-forest);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 0.8;
+}
+
+.meal-world-heading > p {
+  max-width: 20rem;
+  margin: 0;
+  color: rgba(43, 31, 26, 0.7);
+}
+
+.meal-collage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.meal-card {
+  margin: 0;
+  overflow: hidden;
+  background: var(--sana-soft);
+  border: 1px solid var(--sana-line);
+  box-shadow: 8px 10px 0 rgba(43, 31, 26, 0.06);
+}
+
+.meal-card:nth-child(2n) {
+  transform: translateY(1.5rem) rotate(1.1deg);
+}
+
+.meal-card:nth-child(3n) {
+  transform: rotate(-1.1deg);
+}
+
+.meal-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.meal-card-tall img {
+  aspect-ratio: 4 / 5.8;
+}
+
+.meal-card-wide {
+  grid-column: span 2;
+}
+
+.meal-card-wide img {
+  aspect-ratio: 16 / 8;
+  object-position: center 46%;
+}
+
+.meal-card figcaption {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.8rem 0.9rem 1rem;
+}
+
+.meal-card figcaption strong {
+  color: var(--sana-forest);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5rem;
+  line-height: 0.95;
+}
+
+.meal-card figcaption span {
+  color: var(--sana-terracotta);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.meal-card-dark {
+  background: var(--sana-forest);
+}
+
+.meal-card-dark figcaption strong,
+.meal-card-dark figcaption span {
+  color: var(--sana-soft);
+}
+
+@media (min-width: 760px) {
+  .drink-world-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+    align-items: center;
+  }
+
+  .meal-world-heading {
+    grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.4fr);
+  }
+}
+
+@media (min-width: 980px) {
+  .meal-collage {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .meal-card-wide {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .menu-masthead {
+    min-height: 30rem;
+  }
+
+  .menu-masthead-top {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .menu-masthead-side {
+    right: 1.2rem;
+    bottom: 1.5rem;
+  }
+
+  .menu-masthead h1 {
+    font-size: clamp(3.5rem, 18vw, 5.5rem);
+  }
+
+  .drink-mini-grid {
+    gap: 0.45rem;
+  }
+
+  .meal-card-wide {
+    grid-column: span 2;
+  }
+}
