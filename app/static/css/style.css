@@ -1399,9 +1399,9 @@ td {
 /* Menu editorial composition */
 .menu-masthead {
   position: relative;
-  min-height: 34rem;
-  margin: -1rem 0 4rem;
-  padding: 1.1rem clamp(1.2rem, 4vw, 4rem) 3rem;
+  min-height: 35rem;
+  margin: -1rem -1rem 4rem;
+  padding: 1.1rem 1.2rem 3rem;
   overflow: hidden;
   color: var(--sana-soft);
   background: var(--sana-terracotta);
@@ -1427,8 +1427,8 @@ td {
 }
 
 .menu-masthead-top {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  gap: 0.35rem;
   gap: 1rem;
   padding-bottom: 0.8rem;
   border-bottom: 1px solid rgba(248, 244, 236, 0.4);
@@ -1441,7 +1441,7 @@ td {
 
 .menu-masthead-main {
   max-width: 48rem;
-  padding-top: clamp(4rem, 10vw, 8rem);
+  padding-top: 4rem;
 }
 
 .menu-masthead .eyebrow {
@@ -1451,7 +1451,7 @@ td {
 .menu-masthead h1 {
   margin-bottom: 1.2rem;
   color: var(--sana-soft);
-  font-size: clamp(4rem, 11vw, 9rem);
+  font-size: clamp(3.5rem, 18vw, 5.5rem);
   line-height: 0.79;
 }
 
@@ -1486,11 +1486,11 @@ td {
 
 .menu-masthead-side {
   position: absolute;
-  right: clamp(1.5rem, 8vw, 8rem);
-  bottom: 2.5rem;
+  right: 1.2rem;
+  bottom: 1.5rem;
   display: grid;
   gap: 0.7rem;
-  max-width: 9rem;
+  max-width: 7rem;
   padding-left: 1rem;
   border-left: 1px solid rgba(248, 244, 236, 0.42);
 }
@@ -1536,6 +1536,7 @@ td {
 }
 
 .section-label small {
+  display: none;
   color: var(--sana-moss);
   font-size: 0.65rem;
   letter-spacing: 0.04em;
@@ -1548,20 +1549,20 @@ td {
 }
 
 .drink-world {
-  margin-bottom: clamp(4rem, 9vw, 8rem);
+  margin-bottom: 4rem;
 }
 
 .drink-world-grid {
   display: grid;
-  gap: clamp(2rem, 6vw, 5rem);
+  gap: 2rem;
 }
 
 .drink-board-wrap {
   position: relative;
-  padding: clamp(0.8rem, 2vw, 1.4rem);
+  padding: 0.8rem;
   background: var(--sana-sand);
-  transform: rotate(-1.2deg);
-  box-shadow: 12px 16px 0 rgba(34, 60, 40, 0.12);
+  transform: rotate(-0.5deg);
+  box-shadow: 6px 8px 0 rgba(34, 60, 40, 0.12);
 }
 
 .drink-board {
@@ -1588,7 +1589,7 @@ td {
 .drink-notes h2 {
   margin-bottom: 1rem;
   color: var(--sana-forest);
-  font-size: clamp(3rem, 6vw, 5.4rem);
+  font-size: clamp(2.8rem, 15vw, 4.5rem);
   line-height: 0.84;
 }
 
@@ -1650,7 +1651,7 @@ td {
 .meal-world-heading h2 {
   margin-bottom: 0;
   color: var(--sana-forest);
-  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-size: clamp(2.8rem, 15vw, 5rem);
   line-height: 0.8;
 }
 
@@ -1662,8 +1663,8 @@ td {
 
 .meal-collage {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
   align-items: start;
 }
 
@@ -1676,11 +1677,11 @@ td {
 }
 
 .meal-card:nth-child(2n) {
-  transform: translateY(1.5rem) rotate(1.1deg);
+  transform: none;
 }
 
 .meal-card:nth-child(3n) {
-  transform: rotate(-1.1deg);
+  transform: none;
 }
 
 .meal-card img {
@@ -1695,12 +1696,12 @@ td {
 }
 
 .meal-card-wide {
-  grid-column: span 2;
+  grid-column: auto;
 }
 
 .meal-card-wide img {
-  aspect-ratio: 16 / 8;
-  object-position: center 46%;
+  aspect-ratio: 4 / 5;
+  object-position: center;
 }
 
 .meal-card figcaption {
@@ -1732,6 +1733,31 @@ td {
 }
 
 @media (min-width: 760px) {
+  .menu-masthead {
+    min-height: 34rem;
+    margin: -1rem 0 4rem;
+    padding: 1.1rem clamp(1.2rem, 4vw, 4rem) 3rem;
+  }
+
+  .menu-masthead-top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .menu-masthead-main {
+    padding-top: clamp(4rem, 10vw, 8rem);
+  }
+
+  .menu-masthead h1 {
+    font-size: clamp(4rem, 11vw, 9rem);
+  }
+
+  .menu-masthead-side {
+    right: clamp(1.5rem, 8vw, 8rem);
+    bottom: 2.5rem;
+    max-width: 9rem;
+  }
+
   .drink-world-grid {
     grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
     align-items: center;
@@ -1740,39 +1766,37 @@ td {
   .meal-world-heading {
     grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.4fr);
   }
-}
 
-@media (min-width: 980px) {
+  .section-label small {
+    display: inline;
+  }
+
   .meal-collage {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .meal-card:nth-child(2n) {
+    transform: translateY(1.5rem) rotate(1.1deg);
+  }
+
+  .meal-card:nth-child(3n) {
+    transform: rotate(-1.1deg);
   }
 
   .meal-card-wide {
     grid-column: span 2;
   }
+
+  .meal-card-wide img {
+    aspect-ratio: 16 / 8;
+    object-position: center 46%;
+  }
 }
 
-@media (max-width: 560px) {
-  .menu-masthead {
-    min-height: 30rem;
-  }
-
-  .menu-masthead-top {
-    display: grid;
-    gap: 0.35rem;
-  }
-
-  .menu-masthead-side {
-    right: 1.2rem;
-    bottom: 1.5rem;
-  }
-
-  .menu-masthead h1 {
-    font-size: clamp(3.5rem, 18vw, 5.5rem);
-  }
-
-  .drink-mini-grid {
-    gap: 0.45rem;
+@media (min-width: 980px) {
+  .meal-collage {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .meal-card-wide {
