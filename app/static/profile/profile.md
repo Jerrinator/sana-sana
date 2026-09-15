@@ -85,6 +85,13 @@ SANA_SANA_PROFILE = {
     ],
     "meal_prep": [
       {
+        "name": "Protein Pollo Asado and Rice Bowl",
+        "status": "Verified from Instagram restock post; availability is weekly/seasonal and should not be assumed current.",
+        "description": "Juicy, marinated pollo asado served with rice and positioned as a protein-forward comfort-food meal.",
+        "macros": {"calories": 586, "protein": 55, "carbs": 40, "fat": 23},
+        "image_status": "Instagram image confirmed in user-provided reference, but no local image asset has been downloaded yet."
+      },
+      {
         "name": "Chicken Al Pastor Tacos",
         "macros": {"calories": 532, "carbs": 49, "protein": 54, "fat": 8}
       },
