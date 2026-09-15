@@ -1,14 +1,16 @@
 :root {
   --sana-forest: #223c28;
   --sana-moss: #506b43;
-  --sana-lime: #dfded3;
-  --sana-olive: #5f6e3c;
+  --sana-lime: #d9e5aa;
+  --sana-olive: #6e7c49;
   --sana-cream: #f8f4ec;
-  --sana-sand: #e6ceb5;
+  --sana-sand: #f7e9d4;
   --sana-clay: #a65838;
   --sana-terracotta: #8c4126;
   --sana-ink: #2b1f1a;
   --sana-soft: #fcf9f4;
+  --sana-line: rgba(34, 60, 40, 0.16);
+  --sana-shadow: 0 18px 42px rgba(43, 31, 26, 0.08);
 }
 
 * {
@@ -22,9 +24,11 @@ body {
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   color: var(--sana-ink);
-  background: #f8f4ec;
+  background-color: var(--sana-cream);
+  background-image: linear-gradient(135deg, rgba(247, 233, 212, 0.32), transparent 38%),
+                    linear-gradient(315deg, rgba(217, 229, 170, 0.18), transparent 42%);
   line-height: 1.6;
 }
 
@@ -38,7 +42,7 @@ h2,
 h3,
 h4 {
   font-family: "Cormorant Garamond", serif;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   margin-top: 0;
   line-height: 1.05;
 }
@@ -115,8 +119,8 @@ a {
   top: 0;
   z-index: 120;
   backdrop-filter: blur(8px);
-  background: rgba(248, 244, 236, 0.95);
-  border-bottom: 1px solid rgba(34, 60, 40, 0.15);
+  background: rgba(248, 244, 236, 0.94);
+  border-bottom: 1px solid var(--sana-line);
 }
 
 .nav-wrap {
@@ -400,7 +404,7 @@ a {
 }
 
 .hero {
-  padding: 2.5rem 0 1.7rem;
+  padding: clamp(2rem, 5vw, 4.5rem) 0 2rem;
 }
 
 .hero-grid {
@@ -415,19 +419,15 @@ a {
 .info-block,
 .stacked-form,
 .modal-content {
-  background: rgba(255, 255, 255, 0.7);
-  border: 8px solid transparent;
-  /* thin talavera frame using border_tiles/tile1's own outer decorative band; slice keeps its plain center out */
-  border-image-source: url("../images/border_tiles/border_design_tile1.png");
-  border-image-slice: 300;
-  border-image-width: 8px;
-  border-image-repeat: round;
-  border-radius: 28px;
-  box-shadow: 0 24px 60px rgba(60, 73, 46, 0.06);
+  background: rgba(252, 249, 244, 0.88);
+  border: 1px solid var(--sana-line);
+  border-radius: 12px;
+  box-shadow: var(--sana-shadow);
 }
 
 .hero-copy {
   padding: clamp(1.25rem, 2vw, 2rem);
+  border-left: 6px solid var(--sana-terracotta);
 }
 
 .eyebrow {
