@@ -25,6 +25,11 @@ SANA_SANA_PROFILE = {
       "Support health goals without making food feel morally ranked.",
       "Describe comfort, nourishment, convenience, and staying power.",
       "Use confident but non-intimidating nutrition language."
+    ],
+    "community_commitments": [
+      "Meet people where they are: customers who cannot reach the upstairs farmstand because of a disability or mobility barrier should be able to message Sana Sana for personal delivery.",
+      "Describe access as belonging and care, not as a burden or a special favor.",
+      "When this service is active, communicate it plainly and warmly: no one should feel limited in access to health, wellness, or food made with love."
     ]
   },
 
@@ -73,7 +78,8 @@ SANA_SANA_PROFILE = {
     "weekly_restock": "Announcements about new meal prep options, macro breakdowns, order windows, and schedule changes.",
     "seasonal_updates": "Holiday pauses, sick-day pauses, family-time announcements, and seasonal flavors.",
     "nutrition_focus": "Every food item should show calories, protein, carbs, and fat when the data is available; include sugar for drinks when relevant.",
-    "community_posts": "Specific YMCA partnerships, local health initiatives, and tangible community stories."
+    "community_posts": "Specific YMCA partnerships, local health initiatives, and tangible community stories.",
+    "accessibility_service": "Sana Sana has communicated that customers who cannot make it up the stairs to the farmstand can message the business for free personal delivery. Treat this as a verified brand/community commitment to test and confirm with the owner before presenting it as a current standing policy."
   },
 
   "product_categories": {
@@ -113,6 +119,7 @@ SANA_SANA_PROFILE = {
     "restock_status": "Make order-open state, next restock date, pickup or delivery window, and current availability easy to find.",
     "maintenance": "A technical outage may use the unavailable page, while a planned family-time or restock pause should ideally keep browsing available and explain the next order date.",
     "community": "Show specific partners, programs, and ways to participate rather than generic community claims.",
+    "accessibility": "Make ordering and pickup feel available to all bodies and abilities; surface delivery/access help where relevant instead of hiding it in fine print.",
     "pilates": "Keep cafe, nutrition, and Pilates journeys distinct in the hierarchy unless the business decides one should lead."
   },
 
