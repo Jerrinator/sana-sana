@@ -2,6 +2,8 @@
 
 A working menu reference compiled from the downloaded Facebook posts and user-provided Instagram references. Items may rotate with weekly restocks, seasonal schedules, holidays, family time, or ingredient availability.
 
+**Owner editing:** Update the `Price` line under each dish when pricing changes. Use a value such as `$8` or `$8.50`; replace `OWNER: ADD PRICE` when a price is confirmed. This file is intentionally plain Markdown so owners can edit prices without changing application code.
+
 ## Drinks
 
 ### Protein Pumpkin Spice Horchata
@@ -12,6 +14,7 @@ A seasonal protein horchata featured by Sana Sana.
 - Protein: 34g
 - Sugar: 16g
 - Fat: 3g
+- Price: OWNER: ADD PRICE
 - Availability: Featured/restock item; confirm current availability before presenting as available today.
 - Image: [Protein Pumpkin Spice Horchata](../images/facebook/788758530_122163614613083929_7563104704126387061_n.jpg)
 - Source: Downloaded Facebook post capture in [20plus-Facebook.md](../images/20plus-Facebook.md)
@@ -26,7 +29,7 @@ Juicy marinated pollo asado served with rice as a protein-forward comfort-food m
 - Protein: 55g
 - Carbohydrates: 40g
 - Fat: 23g
-- Price: Not confirmed in the available reference
+- Price: OWNER: ADD PRICE
 - Availability: Verified from an Instagram restock post; weekly/seasonal availability, not guaranteed current.
 - Image: [Protein Pollo Asado and Rice Bowl](../images/Protein%20Pollo%20Asado%20%26%20Rice%20Bowl.png)
 - Source: User-provided Instagram screenshot and local image asset
@@ -52,7 +55,7 @@ Chicken Al Pastor tacos served with rice and homemade salsa verde.
 - Protein: 54g
 - Carbohydrates: 49g
 - Fat: 8g
-- Price: Not confirmed in the available reference
+- Price: OWNER: ADD PRICE
 - Availability: Featured in a Facebook meal-prep restock post; weekly availability, not guaranteed current.
 - Image: [Chicken Al Pastor Tacos](../images/facebook/785600148_122163524289083929_9041893264430841552_n.jpg)
 - Source: Downloaded Facebook post capture in [20plus-Facebook.md](../images/20plus-Facebook.md)
@@ -65,7 +68,7 @@ A Mexican street corn pasta salad described as a protein-packed comfort-food mea
 - Protein: 58g
 - Carbohydrates: 42g
 - Fat: 16g
-- Price: Not confirmed in the available reference
+- Price: OWNER: ADD PRICE
 - Availability: Featured in a Facebook meal-prep restock post; weekly availability, not guaranteed current.
 - Image: [Mexican Street Corn Pasta Salad](../images/facebook/786303491_122163466677083929_2553711147174228023_n.jpg)
 - Source: Downloaded Facebook post capture in [20plus-Facebook.md](../images/20plus-Facebook.md)
@@ -78,7 +81,7 @@ A protein-focused Chicken Alfredo meal-prep option.
 - Protein: 36.5g
 - Carbohydrates: 33.6g
 - Fat: 8.2g
-- Price: Not confirmed in the available reference
+- Price: OWNER: ADD PRICE
 - Availability: Featured in a Facebook meal-prep restock post; weekly availability, not guaranteed current.
 - Image: [Protein Chicken Alfredo](../images/facebook/788144974_122163240747083929_1074597849400728296_n.jpg)
 - Source: Downloaded Facebook post capture in [20plus-Facebook.md](../images/20plus-Facebook.md)
@@ -89,3 +92,4 @@ A protein-focused Chicken Alfredo meal-prep option.
 - Do not present every item as available at the same time; use the current restock schedule as the source of truth.
 - The Facebook capture mentions that Sana Sana may pause juicing while continuing meal-prep restocks, and may adjust schedules for holidays or family time.
 - No ingredients, allergens, serving sizes, or prices should be inferred beyond what the source material states.
+- `OWNER: ADD PRICE` means the owner still needs to supply or confirm the current price.
