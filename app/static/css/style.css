@@ -114,6 +114,27 @@ a {
   border-radius: 44% 44% 12% 12% / 28% 28% 12% 12%;
 }
 
+.signup-arch {
+  padding-top: clamp(2.8rem, 7vw, 4.5rem) !important;
+  padding-inline: clamp(1rem, 5vw, 2rem) !important;
+}
+
+.signup-arch > h2,
+.signup-arch > p {
+  width: 78%;
+  margin-inline: auto;
+}
+
+.signup-arch > h2 {
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  overflow-wrap: break-word;
+}
+
+.signup-arch > .stacked-form {
+  width: min(100%, 30rem);
+  margin-inline: auto;
+}
+
 .site-header {
   position: sticky;
   top: 0;
