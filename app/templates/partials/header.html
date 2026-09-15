@@ -64,6 +64,11 @@
       <a href="{{ url_for('public.cafe_and_menu') }}">Cafe &amp; Menu</a>
       <a href="{{ url_for('public.about_us') }}">About Us</a>
       <a href="{{ url_for('public.contact_and_location') }}">Contact &amp; Location</a>
+      {% if session.get('customer') %}
+        <a href="{{ url_for('public.rewards') }}" class="rewards-nav-badge">My Rewards</a>
+      {% else %}
+        <a href="{{ url_for('public.rewards') }}">User Login / Rewards</a>
+      {% endif %}
       {% if session.get('admin_user') %}
         <a href="{{ url_for('admin.dashboard') }}" class="rewards-nav-badge">Admin: {{ session.get('admin_profile', {}).get('first_name', 'Owner') }}</a>
       {% else %}
