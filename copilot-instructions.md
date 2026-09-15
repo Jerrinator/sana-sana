@@ -2,6 +2,10 @@
 
 These instructions apply when deploying the Sana Sana Cafe Flask web application to Heroku.
 
+## Design Profile
+
+The authoritative brand and product design brief is [app/static/profile/profile.md](app/static/profile/profile.md). Read it before making user-facing design, content, navigation, or menu decisions. Owners prefer a cream canvas with forest green structure and dark clay warmth; use the tile assets as restrained framing, keep macros and availability prominent, and preserve tile3's intentional transparency.
+
 ## Border Tile Assets
 
 Decorative talavera-style border/background tiles live in `app/static/images/border_tiles/`:
