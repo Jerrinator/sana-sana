@@ -3,7 +3,8 @@ const siteNav = document.getElementById("siteNav");
 
 if (menuToggle && siteNav) {
   menuToggle.addEventListener("click", () => {
-    siteNav.classList.toggle("open");
+    const isOpen = siteNav.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
   });
 }
 

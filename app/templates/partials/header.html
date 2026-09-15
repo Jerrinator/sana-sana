@@ -48,7 +48,9 @@
       {% endif %}
     </div>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">Menu</button>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <nav id="siteNav" class="site-nav">
       <a href="{{ url_for('public.home') }}">Home</a>
       <div class="dropdown">
